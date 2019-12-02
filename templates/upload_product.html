@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>上传文件</title>
+    <link href='/static/css/Huploadify.css' rel='stylesheet' type='text/css' />
+    <script src='/static/js/jquery-1.12.1.min.js'></script>
+    <script src='/static/js/jquery.Huploadify.js'></script>
+</head>
+<body>
+
+
+        <label class="form-label col-xs-4 col-sm-2">选择影片</label>
+            <select name="goods" id="goods">
+                {% for foo in movie %}
+                <option value="{{ foo.id }}">{{ foo.movie_name }}</option>
+                {% end %}
+            </select><br>
+		
+
+		
+        <div id="upload"></div>
+
+        <div id="result"></div>
+
+
+    <script>
+
+	let name = $("#t1").val();
+	var filename;
+
+
+    var up = $('#upload').Huploadify({
+		auto:false,
+		fileTypeExts:'*.*',
+        multi:true,
+		fileSizeLimit:99999999999,
+        showUploadedPercent:true,
+        formData:{'name':'123'},
+		showUploadedSize:true,
+        removeTimeout:9999999,
+        method: 'post',
+		uploader:'/upload_product',
+		onUploadStart:function(file){
+            console.log(file.name+'开始上传');
+            //$("#upload").Huploadify("settings","formData",{'name':'someValue'});
+            var goods = $('#goods').val();
+            var order = $('#order').val();
+            uploadify_option.formData={goods:goods, order:order};
+		},
+		onInit:function(obj){
+			console.log('初始化');
+			console.log(obj);
+		},
+		onUploadComplete:function(file){
+			console.log(file.name+'上传完成');
+            filename = file.name;
+            $("#result").html("<img src='/static/upload/"+file.name+"' />")
+		},
+		onCancel:function(file){
+			console.log(file.name+'删除成功');
+		},
+		onClearQueue:function(queueItemCount){
+			console.log('有'+queueItemCount+'个文件被删除了');
+		},
+		onDestroy:function(){
+			console.log('destroyed!');
+		},
+		onSelect:function(file){
+			console.log(file.name+'加入上传队列');
+		},
+		onQueueComplete:function(queueData){
+			console.log('队列中的文件全部上传完成',queueData);
+		},
+		//接受后台返回的参数
+		'onUploadSuccess' : function(file, data, response) {
+            // alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
+        }
+	});
+
+	/*$('#btn2').click(function(){
+		up.upload('*');
+	});
+	$('#btn3').click(function(){
+		up.cancel('*');
+	});
+	$('#btn4').click(function(){
+		//up.disable();
+		up.Huploadify('disable');
+	});
+	$('#btn5').click(function(){
+		up.ennable();
+	});
+	$('#btn6').click(function(){
+		up.destroy();
+	});*/
+
+
+    </script>
+
+
+
+
+</body>
+</html>
