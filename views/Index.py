@@ -58,26 +58,6 @@ class Picture_del(BaseHandler):
         self.redirect('/picture_list')
 
 
-# #修改图片
-# class Picture_edit(BaseHandler):
-#     def get(self,id):
-#         user = sess.query(User).filter_by(id=id).first()
-#         self.render('../templates/member-update.html',user=user)
-#     def post(self, id):
-#         p = sess.query(User).filter_by(id=id).first()
-#         name = self.get_argument('name')
-#         gender = self.get_argument('gender')
-#         birthplace = self.get_argument('birthplace')
-#         phone = self.get_argument('phone')
-#         p.name = name
-#         p.gender = gender
-#         p.birthplace = birthplace
-#         p.phone = phone
-#         sess.commit()
-#         self.redirect('/member_list')
-
-
-
 # 明星管理
 class Product_brand(BaseHandler):
     def get(self, *args, **kwargs):
@@ -263,7 +243,7 @@ class Product_category(BaseHandler):
 # 添加分类
 class Product_category_add(BaseHandler):
     def get(self, *args, **kwargs):
-        classify = sess.query(Classify).all()
+        classify = sess.query(Classify).one()
         mes = {}
         mes['data'] = ''
         self.render('../templates/product_category_add.html', classify=classify,**mes)
@@ -347,7 +327,6 @@ class Product_details(BaseHandler):
     def get(self,id):
         video = sess.query(Video).filter(Video.id == id ).one()
         self.render('../templates/product_details.html',video=video)
-
 
 
 

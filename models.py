@@ -51,21 +51,21 @@ class User(Base,IdBase):
 # 视频表
 class Video(Base,IdBase):
     __tablename__ = "video"
-    name = Column(String(100))                   #电影名 （必填）
+    name = Column(String(100))                   #电影名（必填）
     english_name = Column(String(100))           #英文名
     director = Column(String(100),default="")    #导演
     cinemanufacturer = Column(String(100))       #制片人
     protagonist = Column(String(100))            #主演
     cost = Column(String(100))                   #制片成本
     scriptwriter = Column(String(100))           #编剧
-    release_date = Column(String(100))           #上映时间
+    release_date = Column(String(100))           #上映时间 
     box_office = Column(String(100))             #票房
     intro = Column(Text)                         #电影简介 （必填）
     year = Column(String(100))                   #制片年份 （必填）
     region = Column(String(100))                 #影片地区 （必填）
-    length = Column(String(100))                 #片长
-    types = Column(Integer)                      #类型  必需字段 0为短视频 1为电影
-    tag = Column(String(100))                    #影片标签.
+    length = Column(String(100))                 #片长  
+    types = Column(Integer)                      #类型   必需字段 0为短视频 1为电影  
+    tag = Column(String(100))                    #影片标签
     resolution = Column(String(100))             #分辨率
     path = Column(String(100))                   #播放路径  （必填）
     amount = Column(Integer,default=0)           #播放次数
@@ -82,10 +82,14 @@ class Video(Base,IdBase):
 
 
 
+
 # 分类表
 class Classify(Base,IdBase):
     __tablename__ = "classify"
-    name = Column(String(60))             # 分类名
+    name = Column(String(60))               # 分类名
+    video_id = Column(Integer)              # 视频id
+    micro_video_id = Column(Integer)        # 微视频id
+
 
 
 
@@ -94,6 +98,17 @@ class ClassAndvideo(Base,IdBase):
     __tablename__ = "classandvideo"
     class_id = Column(Integer)
     video_id = Column(Integer,nullable=False)
+
+
+
+
+# 微视频表
+class Micro_video(Base,IdBase):
+    __tablename__ = "micro_video"
+    name = Column(String(100))                   #微视频内容标题(必填)
+    director = Column(Integer)                   #用户id
+    length = Column(String(100))                 #片长
+
 
 
 
@@ -154,22 +169,28 @@ class Comment(Base,IdBase):
     types = Column(Integer,default=0)                        #评论类型,如果为0则是对电影的评论，如果大于0 是追加评论。
     user_id = Column(Integer)                                #用户id
     video_id = Column(Integer)                               #电影id
+    micro_video_id = Column(Integer)                         #微视频id
+
 
 
 
 #用户收藏表
 class Collect(Base,IdBase):
     __tablename__ = "collect"
-    user_id = Column(Integer)
-    video_id = Column(Integer)
+    user_id = Column(Integer)            #用户id
+    video_id = Column(Integer)           #视频id
+    micro_video_id = Column(Integer)     #微视频id
+
+
 
 
 
 #用户关注表
 class Attention(Base,IdBase):
     __tablename__ = "attention"
-    user_id = Column(Integer)
-    big_v_id = Column(Integer)
+    user_id = Column(Integer)               #用户id
+    big_v_id = Column(Integer)              #视频id
+    micro_video_id = Column(Integer)        #微视频id
     types = Column(Integer)             #关注的类型 1为栏目，2为明星 3为导演 4位主持人
 
 
@@ -177,16 +198,18 @@ class Attention(Base,IdBase):
 # 点赞表
 class Praise(Base,IdBase):
     __tablename__ = "praise"
-    user_id = Column(Integer)      #回复id
-    movie_id = Column(Integer)     #电影id
-    pratype = Column(Integer)      #点赞类型 1为视频点赞  2为大V点赞
+    user_id = Column(Integer)                #用户id
+    movie_id = Column(Integer)               #电影id
+    micro_video_id = Column(Integer)         #微视频id
+    pratype = Column(Integer)                #点赞类型 1为视频点赞  2为大V点赞
 
 
 
 #意见反馈表
 class Opinion(Base,IdBase):
     __tablename__ = "opinion"
-    title = Column(String(60))
+    title = Column(String(60))      
+    user_id = Column(Integer)       #用户id
     types = Column(String(60))      #做出下拉菜单
     body = Column(Text)             #内容
 
@@ -201,7 +224,7 @@ class Picture(Base):
     big_v_id = Column(Integer)              #明星id
     video_id = Column(Integer)              #视频id
     user_id = Column(Integer)               #用户id
-
+    micro_video_id = Column(Integer)        #微视频id
 
 
 
@@ -219,8 +242,6 @@ class System(Base):
     mail_account = Column(String(255))              # 邮箱帐号
     email_password  = Column(Integer,default=0)     # 邮箱密码
     email_address = Column(String(255))             # 收件邮箱地址
-
-
 
 
 
