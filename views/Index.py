@@ -578,17 +578,64 @@ class Charts_7(BaseHandler):
         self.render('../templates/charts_7.html')
 
 
-# 系统设置（添加）
+
+
+# # 系统设置（添加）
+# class System_base(BaseHandler):
+#     def get(self, *args, **kwargs):
+#         self.render('../templates/system_base.html')
+#     def post(self, *srgs, **kwsrgs):
+#         site_name = self.get_argument('site_name', '')
+#         domain_name = self.get_argument('domain_name', '')
+#         describe = self.get_argument('describe', '')
+#         copyrights = self.get_argument('copyrights', '')
+#         number = self.get_argument('number', '')
+#         SMTP_server = self.get_argument('SMTP_server', '')
+#         SMTP_port = self.get_argument('SMTP_port', '')
+#         mail_account = self.get_argument('mail_account', '')
+#         email_password = self.get_argument('email_password', '')
+#         email_address = self.get_argument('email_address', '')
+#         system = System(site_name=site_name,domain_name=domain_name,describe=describe,
+#                 number=number,copyrights=copyrights,SMTP_server=SMTP_server,SMTP_port=SMTP_port,
+#                 mail_account=mail_account,email_password=email_password,email_address=email_address
+#                 )
+#         sess.add(system)
+#         sess.commit()
+#         self.redirect('/system_base')
+
+
+
+
+# 系统设置（修改）
 class System_base(BaseHandler):
     def get(self, *args, **kwargs):
-        self.render('../templates/system_base.html')
+        system = sess.query(System).filter_by(id=1).first()
+        self.render('../templates/system_base.html',system=system)
+    def post(self, *args, **kwargs):
+        p = sess.query(System).filter_by(id=1).first()
+        site_name = self.get_argument('site_name', '')
+        domain_name = self.get_argument('domain_name', '')
+        describe = self.get_argument('describe', '')
+        copyrights = self.get_argument('copyrights', '')
+        number = self.get_argument('number', '')
+        SMTP_server = self.get_argument('SMTP_server', '')
+        SMTP_port = self.get_argument('SMTP_port', '')
+        mail_account = self.get_argument('mail_account', '')
+        email_password = self.get_argument('email_password', '')
+        email_address = self.get_argument('email_address', '')
+        p.site_name = site_name
+        p.domain_name = domain_name
+        p.describe = describe
+        p.copyrights = copyrights
+        p.SMTP_server = SMTP_server
+        p.SMTP_port = SMTP_port
+        p.email_password = email_password
+        p.email_address = email_address
+        p.number = number
+        p.mail_account = mail_account
+        sess.commit()
+        self.redirect('/system_base')
 
-
-
-
-
-
-        
 
 
 # 栏目管理

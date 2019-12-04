@@ -210,34 +210,16 @@ class System(Base):
     __tablename__ = 'system'
     id = Column(Integer, primary_key = True,autoincrement=True)  
     site_name = Column(String(255))                 # 网站名称
-    server_name = Column(String(255))               # 服务器计算机名
-    system_name = Column(String(255))               # 当前系统用户名
-    ip_address = Column(String(255))                # 服务器IP地址
     domain_name  = Column(String(255))              # 服务器域名
-    server_port = Column(Integer,default=0)         # 服务器端口
-    IIS_version  = Column(String(255))              # 服务器IIS版本
-    IE_version = Column(String(255))                # 服务器IE版本
-    CPU_sum  = Column(Integer,default=0)            # CPU 总数
-    CPU_type = Column(Integer,default=0)            # CPU 类型
-    antistop = Column(String(255))                  # 关键词
     describe = Column(Text)                         # 描述
-    path = Column(String(255))                      # css、js、images路径配置
-    catalogue = Column(String(255))                 # 上传目录配置
     copyrights = Column(String(255))                # 底部版权信息
-    OS = Column(String(500))                        # 服务器操作系统
-    records = Column(Integer,default=0)             # 备案号
-    Statistical_code = Column(Integer,default=0)    # 统计代码
-    IP_list = Column(String(500))                   # 允许访问后台的IP列表
-    sending_mode = Column(String(255))              # 邮件发送模式
+    number = Column(Integer,default=0)              # 后台登录失败最大次数
     SMTP_server = Column(String(255))               # SMTP服务器
     SMTP_port = Column(Integer,default=0)           # SMTP 端口
-    mail_account = Column(Integer,default=0)        # 邮箱帐号
+    mail_account = Column(String(255))              # 邮箱帐号
     email_password  = Column(Integer,default=0)     # 邮箱密码
-    email_address = Column(Integer,default=0)       # 收件邮箱地址
-    current_time=Column(Integer,default=0)          # 服务器当前时间
-    virtual_memory = Column(Integer,default=0)      # 虚拟内存
-    consume_memory = Column(Integer,default=0)      # 当前程序占用内存
-    memory_of = Column(Integer,default=0)           # 所占内存
+    email_address = Column(String(255))             # 收件邮箱地址
+
 
 
 
