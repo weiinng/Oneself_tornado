@@ -1,5 +1,5 @@
 import tornado.web
-from views import Index,adminuser,User
+from views import Index,adminuser,User,AppPort
 import config
 
 
@@ -7,6 +7,13 @@ import config
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
+
+            (r"/ceshi", AppPort.Ceshi),
+
+
+
+
+
             #主页面操作
             (r"/index", Index.IndexHandler),
             (r"/", Index.Index),  # 首页
