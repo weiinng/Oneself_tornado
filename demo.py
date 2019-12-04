@@ -41,19 +41,23 @@ for cls in clas:
 #遍历取出来
 for a in clasvideolist:
     print(a)
-# clasvideolist = []
-# clas = sess.query(Classify).all()
-# for cls in clas:
-#     item = {}
-#     item["clasId"]=cls.id
-#     item["clasName"] = cls.name
-#     videos = []
-#     clasandvideo = sess.query(ClassAndvideo).filter(ClassAndvideo.class_id==cls.id).all()
-#     for a in clasandvideo:
-#         print(a.video_id)
-#         videos.append(a.video_id)
-#     item["videso"] = videos
-#     clasvideolist.append(item)
-#
-# for a in clasvideolist:
-#     print(a)
+
+
+
+    '''
+给视频添加分类思路
+后台增加视频的html，增加一个下拉菜单，查百度看看多选怎么用 
+self.get_arguments()
+这个函数是获取post返回的列表
+一个列表进行两次commit,取出id，在将video_id 以及做关联的 class_id 存入classadnvideo
+
+class_s = self.get_arguments([1,2,3,4,5],[])
+video = Video(id=id,name=name)
+sess.add(video)
+sess.commit()
+ps:好像有一个方法可以获取到返回的id
+for a in class_s:
+    class_id = ClassAndVideo(class_id = a,video_id = ？？？？)
+    sess.add(class_id)
+sess.commit()
+    '''
