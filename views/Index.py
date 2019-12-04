@@ -7,6 +7,7 @@ import json
 # 首页
 class Index(BaseHandler):
     def get(self, *args, **kwargs):
+
         self.render('../templates/index.html')
 
 
