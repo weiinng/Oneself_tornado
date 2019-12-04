@@ -23,29 +23,19 @@ class Application(tornado.web.Application):
             (r"/admin_role", adminuser.Admin_role),  # 角色管理
             (r"/admin_permission", adminuser.Admin_permission),  # 权限管理
 
-
-
             #用户管理
-            (r"/user_list",User.User_list),
-            (r"/user_add",User.User_add),
-            (r"/user_del/(\d)", User.User_del),
-            (r"/user_change_password/(\d)",User.User_change_password),
-
-
-
-
-
-
-
-
-
-
-
+            (r"/user_list",User.User_list),              #用户管理
+            (r"/member_user_del",User.Member_user_del),     #删除的用户
+            (r"/member_add",User.Member_add),             #添加用户
+            (r"/user_del/(\d)", User.User_del),        #删除用户
+            (r"/member_edit/(\d)",User.Member_edit),    #修改用户
+            (r"/user_change_password/(\d)",User.User_change_password),    #修改密码
+            (r"/member_show/(\d)",User.Member_show),   #用户详情
+            (r"/upload_user/(\d+)", User.Upload_user),  # 用户头像上传
 
 
             (r"/article_list", Index.Article_list),  # 资讯管理
             (r"/picture_list", Index.Picture_list),  # 图片管理
-
             (r"/picture_show", Index.Picture_show),  # 图片展示
             (r"/picture_del/(\d+)", Index.Picture_del),  # 删除图片
             # (r"/picture_edit/(\d+)", Index.Picture_edit),         #修改图片
@@ -55,7 +45,8 @@ class Application(tornado.web.Application):
             (r"/product_brand_add", Index.Product_brand_add),  # 添加明星
             (r"/active_del/(\d+)", Index.Active_del),  # 删除明星
             (r"/product_brand_edit/(\d+)", Index.Product_brand_edit),  # 修改明星
-            (r"/upload_brand", Index.Upload_brand),  # 明星图片上传
+            (r"/product_show/(\d+)", Index.Product_show),  # 明星详情
+            (r"/upload_brand/(\d+)", Index.Upload_brand),  # 明星图片上传
 
 
 
@@ -64,22 +55,21 @@ class Application(tornado.web.Application):
             (r"/category_del/(\d+)", Index.Category_del),  # 删除分类
 
 
+            (r"/product_list", Index.Product_list),  # 视频管理
+            (r"/product_add", Index.Product_add),  # 添加视频
+            (r"/product_del/(\d+)", Index.Product_del),  # 删除视频
+            (r"/product_edit/(\d+)", Index.Product_edit),  # 修改视频
+            (r"/product_details/(\d+)", Index.Product_details),  # 视频详情
+            (r"/upload_product/(\d+)", Index.Upload_product),  # 视频图片上传
 
-            (r"/product_list", Index.Product_list),  # 影片管理
-            (r"/product_add", Index.Product_add),  # 添加影片
-            (r"/product_del/(\d+)", Index.Product_del),  # 删除影片
-            (r"/product_edit/(\d+)", Index.Product_edit),  # 修改影片
-            (r"/upload_product", Index.Upload_product),  # 电影图片上传
 
             (r"/feedment_list", Index.Feedment_list),  # 评论列表
             (r"/feedment_del/(\d+)", Index.Feedment_del),  # 删除评论
-
 
             (r"/feedback_list", Index.Feedback_list),  # 意见反馈
 
 
             (r"/member_level", Index.Member_level),  # 等级管理
-
             (r"/member_scoreoperation", Index.Member_scoreoperation),  # 积分管理
             (r"/member_record_browse", Index.Member_record_browse),  # 浏览记录
             (r"/member_record_download", Index.Member_record_download),  # 下载记录

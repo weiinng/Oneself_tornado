@@ -19,7 +19,7 @@
 <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>用户查看</title>
+<title>明星详情</title>
 </head>
 <body>
 <div class="cl pd-20" style=" background-color:#5bacb6">
@@ -27,8 +27,8 @@
 	<dl style="margin-left:80px; color:#fff">
 		
 		<dt>
-			<span class="f-18">{{ user.name }}</span>
-			<span class="pl-10 f-12">余额：40</span>
+			<span class="f-18">{{ big_v.name }}</span>
+			<span class="pl-10 f-12">性别：{{ big_v.gender }}</span>
 		</dt>
 		<dd class="pt-10 f-12" style="margin-left:0">这家伙很懒，什么也没有留下</dd>
 		
@@ -39,36 +39,78 @@
 		<tbody>
 			
 			<tr>
-				<th class="text-r" width="80">性别：</th>
-				<td>
-					{% if user.gender == 0  %}
-						保密
-					{% elif user.gender ==1 %}
-						男
-					{% else %}
-						女
-					{% end %}
-				</td>
+				<th class="text-r" width="80">生日：</th>
+				<td>{{ big_v.year }}</td>
 			</tr>
+
 			<tr>
-				<th class="text-r">手机：</th>
-				<td>{{ user.phone }}</td>
+				<th class="text-r">职业：</th>
+				<td>{{ big_v.profession }}</td>
 			</tr>
+			
 			<tr>
-				<th class="text-r">邮箱：</th>
-				<td>{{ user.email }}</td>
+				<th class="text-r">简介：</th>
+				<td>{{ big_v.region }}</td>
 			</tr>
+
 			<tr>
 				<th class="text-r">地址：</th>
-				<td>{{ user.birthplace }}</td>
+				<td>{{ big_v.director }}</td>
 			</tr>
+
 			<tr>
-				<th class="text-r">注册时间：</th>
-				<td>{{ user.create_time }}</td>
+				<th class="text-r">出生地：</th>
+				<td>{{ big_v.director }}</td>
 			</tr>
+
 			<tr>
-				<th class="text-r">积分：</th>
-				<td>330</td>
+				<th class="text-r">国籍：</th>
+				<td>{{ big_v.nationality }}</td>
+			</tr>
+
+			<tr>
+				<th class="text-r">英文名：</th>
+				<td>{{ big_v.english_name }}</td>
+			</tr>
+
+			<tr>
+				<th class="text-r">民族：</th>
+				<td>{{ big_v.nation }}</td>
+			</tr>
+
+			<tr>
+				<th class="text-r">毕业院校：</th>
+				<td>{{ big_v.graduate_academy }}</td>
+			</tr>
+
+			<tr>
+				<th class="text-r">血型：</th>
+				<td>{{ big_v.blood_type }}</td>
+			</tr>
+
+			<tr>
+				<th class="text-r">身高：</th>
+				<td>{{ big_v.stature }}</td>
+			</tr>
+
+			<tr>
+				<th class="text-r">体重：</th>
+				<td>{{ big_v.weight }}</td>
+			</tr>
+
+			<tr>
+				<th class="text-r">星座：</th>
+				<td>{{ big_v.constellation }}</td>
+			</tr>
+
+			<tr>
+				<th class="text-r">主要成就：</th>
+				<td>{{ big_v.main_achievements }}</td>
+			</tr>
+			
+			<tr>
+				<th class="text-r">代表作品：</th>
+				<td>{{ big_v.in_work }}</td>
 			</tr>
 			
 		</tbody>

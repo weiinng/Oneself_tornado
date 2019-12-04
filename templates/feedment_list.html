@@ -51,7 +51,7 @@
 				<tr class="text-c">
 					<td><input type="checkbox" value="1" name=""></td>
 					<td>{{ i.id }}</td>
-					<td><a href="/member_show" onclick="member_show('张三','member-show.html','10001','360','400')"><i class="avatar size-L radius"><img alt="" src="static/h-ui/images/ucnter/avatar-default-S.gif"></i></a></td>
+					<td><a href="/member_show/{{ i.id }}" onclick="member_show('张三','member-show.html','10001','360','400')"><i class="avatar size-L radius"><img alt="" src="static/h-ui/images/ucnter/avatar-default-S.gif"></i></a></td>
 					<td>{{ i.comment_time }}</td>
 					<td class="text-l"><div class="c-999 f-12">
 						<div>{{ i.content }}</div></td>

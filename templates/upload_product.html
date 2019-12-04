@@ -14,9 +14,9 @@
 
         <label class="form-label col-xs-4 col-sm-2">选择影片</label>
             <select name="goods" id="goods">
-                {% for foo in movie %}
-                <option value="{{ foo.id }}">{{ foo.movie_name }}</option>
-                {% end %}
+               
+                <option value="{{ video.id }}">{{ video.name }}</option>
+            
             </select><br>
 		
 
@@ -42,7 +42,7 @@
 		showUploadedSize:true,
         removeTimeout:9999999,
         method: 'post',
-		uploader:'/upload_product',
+		uploader:'/upload_product/{{ video.id }}',
 		onUploadStart:function(file){
             console.log(file.name+'开始上传');
             //$("#upload").Huploadify("settings","formData",{'name':'someValue'});

@@ -18,27 +18,27 @@
 <link rel="stylesheet" type="text/css" href="/static/h-ui.admin/skin/default/skin.css" id="skin" />
 <link rel="stylesheet" type="text/css" href="/static/h-ui.admin/css/style.css" />
 <!--[if IE 6]>
-<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js"></script>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>红色创新后台管理系统</title>
+<title>红色创新.admin v0.0</title>
 <meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
 <meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
 <body>
 <header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
-		<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="/aboutHui.shtml">Red innovation</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">H-ui</a>
-			<span class="logo navbar-slogan f-l mr-10 hidden-xs">v0.0.1</span>
+		<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="/aboutHui.shtml">红色创新.admin</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">H-ui</a> 
+			<span class="logo navbar-slogan f-l mr-10 hidden-xs">v0.0</span> 
 			<a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
 			<nav class="nav navbar-nav">
 				<ul class="cl">
-					<li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
+	 				<li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
 						<ul class="dropDown-menu menu radius box-shadow">
-							<li><a href="/article_add" onclick="article_add('添加资讯','article-add.html')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
-							<li><a href="/picture_add" onclick="picture_add('添加图片','picture-add.html')"><i class="Hui-iconfont">&#xe613;</i> 图片</a></li>
-							<li><a href="/product_add" onclick="product_add('添加产品','product-add.html')"><i class="Hui-iconfont">&#xe620;</i> 产品</a></li>
-							<li><a href="/member_add" onclick="member_add('添加用户','member-add.html','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
+							<!-- <li><a href="javascript:;" onclick="article_add('添加资讯','/article_add')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li> -->
+							<!-- <li><a href="javascript:;" onclick="picture_add('添加图片','/picture_add')"><i class="Hui-iconfont">&#xe613;</i> 图片</a></li> -->
+							<li><a href="javascript:;" onclick="product_add('添加产品','/product_add')"><i class="Hui-iconfont">&#xe620;</i> 产品</a></li>
+							<li><a href="javascript:;" onclick="member_add('添加用户','/user_add','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -72,56 +72,64 @@
 </header>
 <aside class="Hui-aside">
 	<div class="menu_dropdown bk_2">
-		<dl id="menu-article">
-			<dt><i class="Hui-iconfont">&#xe616;</i> 视频管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a data-href="/article_list" data-title="视频管理" href="javascript:void(0)">视频管理</a></li>
-			</ul>
-		</dd>
-	</dl>
-		<dl id="menu-picture">
-			<dt><i class="Hui-iconfont">&#xe613;</i> 图片管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a data-href="/picture_list" data-title="图片管理" href="javascript:void(0)">图片管理</a></li>
-			</ul>
-		</dd>
-	</dl>
 		<dl id="menu-product">
-			<dt><i class="Hui-iconfont">&#xe620;</i> 产品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a data-href="/product_brand" data-title="品牌管理" href="javascript:void(0)">明星管理</a></li>
-					<li><a data-href="/product_category" data-title="分类管理" href="javascript:void(0)">分类管理</a></li>
-					<li><a data-href="/product_list" data-title="产品管理" href="javascript:void(0)">影片管理</a></li>
-			</ul>
-		</dd>
-	</dl>
+				<dt><i class="Hui-iconfont">&#xe620;</i> 产品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+				<dd>
+					<ul>
+						<li><a data-href="/product_brand" data-title="品牌管理" href="javascript:void(0)">明星管理</a></li>
+						<li><a data-href="/product_category" data-title="分类管理" href="javascript:void(0)">分类管理</a></li>
+						<li><a data-href="/product_list" data-title="产品管理" href="javascript:void(0)">影片管理</a></li>
+					</ul>
+				</dd>
+			</dl>
+
+			<dl id="menu-member">
+					<dt><i class="Hui-iconfont">&#xe60d;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+					<dd>
+						<ul>
+							<li><a data-href="/user_list" data-title="会员列表" href="javascript:;">会员列表</a></li>
+							
+		
+							<!-- <li><a data-href="/member_list" data-title="会员列表" href="javascript:;">会员列表</a></li> -->
+							<li><a data-href="/member_user_del" data-title="删除的会员" href="javascript:;">删除的会员</a></li>
+							<!-- <li><a data-href="/member_level" data-title="等级管理" href="javascript:;">等级管理</a></li>
+							<li><a data-href="/member_scoreoperation" data-title="积分管理" href="javascript:;">积分管理</a></li> -->
+							<!-- <li><a data-href="/member_record_browse" data-title="浏览记录" href="javascript:void(0)">浏览记录</a></li>
+							<li><a data-href="/member_record_download" data-title="下载记录" href="javascript:void(0)">下载记录</a></li>
+							<li><a data-href="/member_record_share" data-title="分享记录" href="javascript:void(0)">分享记录</a></li> -->
+					</ul>
+				</dd>
+			</dl>
+
+
+		
 		<dl id="menu-comments">
 			<dt><i class="Hui-iconfont">&#xe622;</i> 评论管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="http://h-ui.duoshuo.com/admin/" data-title="评论列表" href="javascript:;">评论列表</a></li>
+					<li><a data-href="/feedment_list" data-title="评论列表" href="javascript:;">评论列表</a></li>
 					<li><a data-href="/feedback_list" data-title="意见反馈" href="javascript:void(0)">意见反馈</a></li>
 			</ul>
 		</dd>
 	</dl>
-		<dl id="menu-member">
-			<dt><i class="Hui-iconfont">&#xe60d;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-                  <li><a data-href="/user_list" data-title="会员列表" href="javascript:;">用户列表</a></li>
+</dl>
 
-					<li><a data-href="/member_list" data-title="会员列表" href="javascript:;">会员列表</a></li>
-					<li><a data-href="/member_user_del" data-title="删除的会员" href="javascript:;">删除的会员</a></li>
-					<li><a data-href="/member_level" data-title="等级管理" href="javascript:;">等级管理</a></li>
-					<li><a data-href="/member_scoreoperation" data-title="积分管理" href="javascript:;">积分管理</a></li>
-					<li><a data-href="/member_record_browse" data-title="浏览记录" href="javascript:void(0)">浏览记录</a></li>
-					<li><a data-href="/member_record_download" data-title="下载记录" href="javascript:void(0)">下载记录</a></li>
-					<li><a data-href="/member_record_share" data-title="分享记录" href="javascript:void(0)">分享记录</a></li>
+<dl id="menu-article">
+		<dt><i class="Hui-iconfont">&#xe616;</i> 视频管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+		<dd>
+			<ul>
+				<li><a data-href="/article_list" data-title="视频管理" href="javascript:void(0)">视频管理</a></li>
 			</ul>
 		</dd>
+	</dl>
+
+	<dl id="menu-picture">
+		<dt><i class="Hui-iconfont">&#xe613;</i> 图片管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+		<dd>
+			<ul>
+				<li><a data-href="/picture_list" data-title="图片管理" href="javascript:void(0)">图片管理</a></li>
+		</ul>
+	</dd>
 	</dl>
 		<dl id="menu-admin">
 			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>

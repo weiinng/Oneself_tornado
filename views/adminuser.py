@@ -1,5 +1,5 @@
 from .base import BaseHandler
-from models import AdminUser,sess
+from models import *
 import json
 
 # 登录

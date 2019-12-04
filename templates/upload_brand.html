@@ -14,9 +14,9 @@
 
         <label class="form-label col-xs-4 col-sm-2">选择明星</label>
             <select name="goods" id="goods">
-                {% for foo in celebrity %}
-                <option value="{{ foo.id }}">{{ foo.celebrity_name }}</option>
-                {% end %}
+            
+                <option value="{{ big_v.id }}">{{ big_v.name }}</option>
+            
             </select><br>
 		
 
@@ -42,7 +42,7 @@
 		showUploadedSize:true,
         removeTimeout:9999999,
         method: 'post',
-		uploader:'/upload_brand',
+		uploader:'/upload_brand/{{ big_v.id }}',
 		onUploadStart:function(file){
             console.log(file.name+'开始上传');
             //$("#upload").Huploadify("settings","formData",{'name':'someValue'});

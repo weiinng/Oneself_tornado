@@ -36,46 +36,121 @@
         <div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>姓名：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="{{ celebrity.celebrity_name }}" placeholder="" id="celebrity_name" name="celebrity_name">
+				<input type="text" class="input-text" value="{{ celebrity.name }}" placeholder="" id="name" name="name">
 			</div>
         </div>
 
         <div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">出生日期：</label>
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>英文名：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{{ celebrity.english_name }}" placeholder="" id="english_name" name="english_name">
+			</div>
+        </div>
+
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">性别：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                    <div class="radio-box">
+                            <input name="gender" type="radio" id="sex-1" checked value="男">
+                            <label for="sex-1">男</label>
+                    </div>
+                    <div class="radio-box">
+                        <input type="radio" id="sex-2" name="gender" value="女">
+                        <label for="sex-2">女</label>
+                    </div>
+            </div>
+        </div>
+
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">血型：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="blood_type" id="blood_type" placeholder="" value="{{ celebrity.blood_type }}" class="input-text">
+			</div>
+        </div>
+
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">身高：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="stature" id="stature" placeholder="" value="{{ celebrity.stature }}" class="input-text">
+			</div>
+        </div>
+
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">体重：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="weight" id="weight" placeholder="" value="{{ celebrity.weight }}" class="input-text">
+			</div>
+        </div>
+
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">星座：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="constellation" id="constellation" placeholder="" value="{{ celebrity.constellation }}" class="input-text">
+			</div>
+        </div>
+
+
+
+
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">生日：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" name="year" id="year" placeholder="" value="{{ celebrity.year }}" class="input-text">
 			</div>
-		</div>
-		
-
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">国籍：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" name="director" id="director" placeholder="" value="{{ celebrity.director }}" class="input-text">
-			</div>
         </div>
+        
 
-
-        <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2">性别：</label>
+        
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2">民族：</label>
                 <div class="formControls col-xs-8 col-sm-9">
-                        <div class="radio-box">
-                                <input name="gender" type="radio" id="sex-1" checked value="男">
-                                <label for="sex-1">男</label>
-                        </div>
-                        <div class="radio-box">
-                            <input type="radio" id="sex-2" name="gender" value="女">
-                            <label for="sex-2">女</label>
-                        </div>
+                    <input type="text" name="nation" id="nation" placeholder="" value="{{ celebrity.nation }}" class="input-text">
                 </div>
             </div>
 
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">身高：</label>
+			<label class="form-label col-xs-4 col-sm-2">国籍：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" name="actor" id="actor" placeholder="" value="{{ celebrity.actor }}" class="input-text">
+				<input type="text" name="nationality" id="nationality" placeholder="" value="{{ celebrity.nationality }}" class="input-text">
 			</div>
-		</div>
+        </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2">职业：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <input type="text" name="profession" id="profession" placeholder="" value="{{ celebrity.profession }}" class="input-text">
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2">出生地：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <input type="text" name="director" id="director" placeholder="" value="{{ celebrity.director }}" class="input-text" style=" width:25%">
+                </div>
+            </div>
+
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2">毕业院校：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <input type="text" name="graduate_academy" id="graduate_academy" placeholder="" value="{{ celebrity.graduate_academy }}" class="input-text">
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2">主要成就：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <input type="text" name="main_achievements" id="main_achievements" placeholder="" value="{{ celebrity.main_achievements }}" class="input-text">
+                </div>
+            </div>
+    
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2">代表作品：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <input type="text" name="in_work" id="in_work" placeholder="" value="{{ celebrity.in_work }}" class="input-text">
+                </div>
+            </div>
 
 
 		<div class="row cl">

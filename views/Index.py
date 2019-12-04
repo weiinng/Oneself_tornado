@@ -1,5 +1,5 @@
 from .base import BaseHandler
-from models import AdminUser,sess
+from models import *
 import json
 
 
@@ -8,8 +8,6 @@ import json
 class Index(BaseHandler):
     def get(self, *args, **kwargs):
         self.render('../templates/index.html')
-
-
 
 
 
@@ -30,7 +28,7 @@ class Article_list(BaseHandler):
 # 上传视频
 class Article_add(BaseHandler):
     def get(self, *args, **kwargs):
-        movie = sess.query(Movie).all()
+        movie = sess.query(Video).all()
         self.render('../templates/article_add.html', movie=movie)
 
 
@@ -43,7 +41,7 @@ class Picture_list(BaseHandler):
 # 添加图片
 class Picture_add(BaseHandler):
     def get(self, *args, **kwargs):
-        movie = sess.query(Movie).all()
+        movie = sess.query(Video).all()
         self.render('../templates/picture_add.html', movie=movie)
 
 
@@ -79,47 +77,56 @@ class Picture_del(BaseHandler):
 
 
 
-
-
 # 明星管理
 class Product_brand(BaseHandler):
     def get(self, *args, **kwargs):
-        celebrity = sess.query(Celebrity).all()
+        celebrity = sess.query(Big_V).all()
         lens = len(celebrity)
         c_list = []
         for i in celebrity:
             c_dict = {}
             c_dict['id'] = i.id
-            c_dict['celebrity_name'] = i.celebrity_name
+            c_dict['name'] = i.name
             c_dict['year'] = i.year
-            c_dict['types'] = i.types
+            c_dict['profession'] = i.profession
             c_dict['gender'] = i.gender
             c_dict['region'] = i.region
-            c_dict['actor'] = i.actor
+            c_dict['nationality'] = i.nationality
             c_dict['director'] = i.director
+            c_dict['nation'] = i.nation
             c_list.append(c_dict)
-        # str_json = json.dumps(c_list,indent=2,ensure_ascii=False)
         self.render('../templates/product_brand.html', celebrity=c_list, lens=lens)
 
     def post(self, *args, **kwargs):
         title = self.get_argument('title', '')
-        celebrity = sess.query(Celebrity).filter(Celebrity.celebrity_name.like('%' + title + '%')).all()
+        celebrity = sess.query(Big_V).filter(Big_V.name.like('%' + title + '%')).all()
         lens = len(celebrity)
         lens = len(celebrity)
         c_list = []
         for i in celebrity:
             c_dict = {}
             c_dict['id'] = i.id
-            c_dict['celebrity_name'] = i.celebrity_name
+            c_dict['name'] = i.name
             c_dict['year'] = i.year
-            c_dict['types'] = i.types
+            c_dict['profession'] = i.profession
             c_dict['gender'] = i.gender
             c_dict['region'] = i.region
-            c_dict['actor'] = i.actor
-            c_dict['director'] = i.director
+            c_dict['nationality'] = i.nationality
+            c_dict['director'] = i.directornation
+            c_dict['nation'] = i.nation
             c_list.append(c_dict)
-        # str_json = json.dumps(c_list,indent=2,ensure_ascii=False)
         self.render('../templates/product_brand.html', celebrity=c_list, lens=lens)
+
+
+
+
+#明星详情
+class Product_show(BaseHandler):
+    def get(self,id):
+        big_v = sess.query(Big_V).filter(Big_V.id == id ).one()
+        self.render('../templates/product_show.html',big_v=big_v)
+
+
 
 
 # 添加明星
@@ -129,14 +136,28 @@ class Product_brand_add(BaseHandler):
         self.render('../templates/product_brand_add.html')
 
     def post(self, *args, **kwargs):
-        celebrity_name = self.get_argument('celebrity_name', '')
+        name = self.get_argument('name', '')
         year = self.get_argument('year', '')
+        english_name = self.get_argument('english_name', '')
+        nation = self.get_argument('nation', '')
+        graduate_academy = self.get_argument('graduate_academy', '')
+        blood_type = self.get_argument('blood_type', '')
+        stature = self.get_argument('stature', '')
+        weight = self.get_argument('weight', '')
+        constellation = self.get_argument('constellation', '')
+        main_achievements = self.get_argument('main_achievements', '')
+        in_work = self.get_argument('in_work', '')
         region = self.get_argument('region', '')
         gender = self.get_argument('gender', '')
+        profession = self.get_argument('profession', '')
+        nationality = self.get_argument('nationality', '')
         director = self.get_argument('director', '')
-        actor = self.get_argument('actor', '')
-        celebrity = Celebrity(celebrity_name=celebrity_name, year=year, region=region, director=director, actor=actor,
-                              gender=gender)
+        celebrity = Big_V(name=name, year=year, region=region, 
+                          nationality=nationality,gender=gender,profession=profession,
+                          director=director,english_name=english_name,nation=nation,    
+                          graduate_academy=graduate_academy,blood_type=blood_type,stature=stature,
+                          weight=weight,constellation=constellation,main_achievements=main_achievements,
+                          in_work=in_work)
         sess.add(celebrity)
         sess.commit()
         self.redirect('/product_brand')
@@ -145,7 +166,7 @@ class Product_brand_add(BaseHandler):
 # 删除明星
 class Active_del(BaseHandler):
     def get(self, id):
-        celebrity = sess.query(Celebrity).filter(Celebrity.id == id).one()
+        celebrity = sess.query(Big_V).filter(Big_V.id == id).one()
         sess.delete(celebrity)
         sess.commit()
         self.redirect('/product_brand')
@@ -154,39 +175,36 @@ class Active_del(BaseHandler):
 # 修改明星
 class Product_brand_edit(BaseHandler):
     def get(self, id):
-        celebrity = sess.query(Celebrity).filter_by(id=id).first()
+        celebrity = sess.query(Big_V).filter_by(id=id).first()
         self.render('../templates/product_brand_edit.html', celebrity=celebrity)
-
     def post(self, id):
-        p = sess.query(Celebrity).filter_by(id=id).first()
-        celebrity_name = self.get_argument('celebrity_name', '')
+        p = sess.query(Big_V).filter_by(id=id).first()
+        name = self.get_argument('name', '')
         year = self.get_argument('year', '')
         region = self.get_argument('region', '')
         gender = self.get_argument('gender', '')
         director = self.get_argument('director', '')
-        actor = self.get_argument('actor', '')
-        p.celebrity_name = celebrity_name
+        nationality = self.get_argument('nationality', '')
+        p.name = name
         p.year = year
         p.region = region
         p.gender = gender
+        p.nationality = nationality
         p.director = director
-        p.actor = actor
         sess.commit()
         self.redirect('/product_brand')
 
 
-import os
-
-
-# 明星上传图片
+import os 
+#明星上传图片
 class Upload_brand(BaseHandler):
-    async def get(self):
-        celebrity = sess.query(Celebrity).all()
-        self.render('../templates/upload_brand.html', celebrity=celebrity)
+    async def get(self,id):
+        big_v = sess.query(Big_V).filter_by(id=id).first()
+        self.render('../templates/upload_brand.html', big_v=big_v)
 
-    async def post(self):
+    async def post(self,id):
         # 上传路径
-        upload_path = os.path.dirname(os.path.dirname(__file__)) + "/static/upload/"
+        upload_path = os.path.dirname(os.path.dirname(__file__))+"/static/upload/"
         # 接收文件，以对象的形式
         img = self.request.files.get('file', None)
         # 获取jquery传来的值
@@ -198,12 +216,13 @@ class Upload_brand(BaseHandler):
             with open(file_path, 'wb') as up:
                 up.write(meta['body'])
             g_img = Picture(picture_name=filename,
-                            celebrity_id=goods
+                            big_v_id = goods
                             )
             sess.add(g_img)
             sess.commit()
             print(g_img)
         self.write(json.dumps({'status': 'ok'}, ensure_ascii=False))
+
 
 
 # 分类管理
@@ -224,6 +243,7 @@ class Product_category(BaseHandler):
             a.append(b)
         str_json = json.dumps(a, indent=2, ensure_ascii=False)
         self.write(str_json)
+
 
 
 # 添加分类
@@ -249,126 +269,135 @@ class Category_del(BaseHandler):
         self.redirect('/product_category_add')
 
 
-# 影片管理
+
+# 视频管理
 class Product_list(BaseHandler):
     def get(self, *args, **kwargs):
-        movie = sess.query(Movie).all()
-        lens = len(movie)
+        video = sess.query(Video).all()
+        lens = len(video)
         m_list = []
-        for i in movie:
+        for i in video:
             m_dict = {}
             m_dict['id'] = i.id
-            m_dict['movie_name'] = i.movie_name
+            m_dict['name'] = i.name
             m_dict['year'] = i.year
             m_dict['region'] = i.region
             m_dict['director'] = i.director
-            m_dict['movie_intro'] = i.movie_intro
+            m_dict['intro'] = i.intro
             m_dict['types'] = i.types
-            m_dict['propertys'] = i.propertys
-            m_dict['resolution'] = i.resolution
-            m_dict['length'] = i.length
-            m_dict['path'] = i.path
-            m_dict['amount'] = i.amount
-            m_dict['propertys'] = i.propertys
-            m_dict['is_soldout'] = i.is_soldout
-            m_dict['is_audit'] = i.is_audit
+            m_dict['tag'] = i.tag
+            m_dict['protagonist'] = i.protagonist 
+            m_dict['box_office'] = i.box_office 
+            m_dict['is_show'] = i.is_show 
             m_list.append(m_dict)
-        self.render('../templates/product_list.html', movie=m_list, lens=lens)
-
+        self.render('../templates/product_list.html', video=m_list, lens=lens)
     def post(self, *args, **kwargs):
         title = self.get_argument('title', '')
-        movie = sess.query(Movie).filter(Movie.movie_name.like('%' + title + '%')).all()
-        lens = len(movie)
+        video = sess.query(Video).filter(Video.name.like('%' + title + '%')).all()
+        lens = len(video)
         m_list = []
-        for i in movie:
+        for i in video:
             m_dict = {}
             m_dict['id'] = i.id
-            m_dict['movie_name'] = i.movie_name
+            m_dict['name'] = i.name
             m_dict['year'] = i.year
             m_dict['region'] = i.region
             m_dict['director'] = i.director
-            m_dict['movie_intro'] = i.movie_intro
+            m_dict['intro'] = i.intro
             m_dict['types'] = i.types
-            m_dict['propertys'] = i.propertys
-            m_dict['resolution'] = i.resolution
-            m_dict['length'] = i.length
-            m_dict['path'] = i.path
-            m_dict['amount'] = i.amount
-            m_dict['propertys'] = i.propertys
-            m_dict['is_soldout'] = i.is_soldout
-            m_dict['is_audit'] = i.is_audit
+            m_dict['tag'] = i.tag
+            m_dict['protagonist'] = i.protagonist
+            m_dict['box_office'] = i.box_office
+            m_dict['is_show'] = i.is_show 
             m_list.append(m_dict)
-        self.render('../templates/product_list.html', movie=m_list, lens=lens)
-        # str_json = json.dumps(a,indent=2,ensure_ascii=False)
-        # self.write(str_json)
+        self.render('../templates/product_list.html', video=m_list, lens=lens)
 
 
-# 添加影片
+
+
+#视频详情
+class Product_details(BaseHandler):
+    def get(self,id):
+        video = sess.query(Video).filter(Video.id == id ).one()
+        self.render('../templates/product_details.html',video=video)
+
+
+
+
+# 添加视频
 class Product_add(BaseHandler):
     def get(self, *args, **kwargs):
         classify = sess.query(Classify).all()
         self.render('../templates/product_add.html', classify=classify)
-
     def post(self, *args, **kwargs):
-        movie_name = self.get_argument('movie_name', '')
+        name = self.get_argument('name', '')
         region = self.get_argument('region', '')
         year = self.get_argument('year', '')
         director = self.get_argument('director', '')
-        movie_intro = self.get_argument('movie_intro', '')
-        classify_id = self.get_argument('classify_id')
-        movie = Movie(movie_name=movie_name, region=region, year=year, director=director, movie_intro=movie_intro,
-                      classify_id=classify_id)
+        intro = self.get_argument('intro', '')
+        english_name = self.get_argument('english_name', '')
+        cinemanufacturer = self.get_argument('cinemanufacturer', '')
+        protagonist = self.get_argument('protagonist', '')
+        cost = self.get_argument('cost', '')
+        scriptwriter = self.get_argument('scriptwriter', '')
+        release_date = self.get_argument('release_date', '')
+        box_office = self.get_argument('box_office', '')
+        length = self.get_argument('length', '')
+        tag = self.get_argument('tag', '')
+        movie = Video(
+            name=name,region=region, year=year,director=director,
+            intro=intro,english_name=english_name,cinemanufacturer=cinemanufacturer,
+            protagonist=protagonist,cost=cost,scriptwriter=scriptwriter,
+            release_date=release_date,box_office=box_office,length=length,
+            tag=tag)
         sess.add(movie)
         sess.commit()
         self.redirect('/product_list')
 
 
-# 删除影片
+# 删除视频
 class Product_del(BaseHandler):
     def get(self, id):
-        movie = sess.query(Movie).filter(Movie.id == id).one()
+        movie = sess.query(Video).filter(Video.id == id).one()
         sess.delete(movie)
         sess.commit()
         self.redirect('/product_list')
 
 
-# #修改影片
+# #修改视频
 class Product_edit(BaseHandler):
     def get(self, id):
         classify = sess.query(Classify).all()
-        movie = sess.query(Movie).filter_by(id=id).first()
-        self.render('../templates/product_edit.html', classify=classify, movie=movie)
+        video = sess.query(Video).filter_by(id=id).first()
+        self.render('../templates/product_edit.html', classify=classify, video=video)
 
     def post(self, id):
-        p = sess.query(Movie).filter_by(id=id).first()
-        movie_name = self.get_argument('movie_name', '')
+        p = sess.query(Video).filter_by(id=id).first()
+        name = self.get_argument('name', '')
         region = self.get_argument('region', '')
         year = self.get_argument('year', '')
         director = self.get_argument('director', '')
-        movie_intro = self.get_argument('movie_intro', '')
-        classify_id = self.get_argument('classify_id')
-        p.movie_name = movie_name
+        intro = self.get_argument('intro', '')
+        p.name = name
         p.region = region
         p.year = year
         p.director = director
-        p.movie_intro = movie_intro
-        p.classify_id = classify_id
+        p.intro = intro
         sess.commit()
         self.redirect('/product_list')
 
 
+
 import os
-
-
-# 电影上传图片
+#电影上传图片
 class Upload_product(BaseHandler):
-    async def get(self):
-        movie = sess.query(Movie).all()
-        self.render('../templates/upload_product.html', movie=movie)
+    async def get(self,id):
+        video= sess.query(Video).filter_by(id=id).first()
+        self.render('../templates/upload_product.html', video=video)
 
-    async def post(self):
+    async def post(self,id):
         # 上传路径
-        upload_path = os.path.dirname(os.path.dirname(__file__)) + "/static/upload/"
+        upload_path = os.path.dirname(os.path.dirname(__file__))+"/static/upload/"
         # 接收文件，以对象的形式
         img = self.request.files.get('file', None)
         # 获取jquery传来的值
@@ -380,11 +409,12 @@ class Upload_product(BaseHandler):
             with open(file_path, 'wb') as up:
                 up.write(meta['body'])
             g_img = Picture(picture_name=filename,
-                            movie_id=goods
+                            video_id = goods
                             )
             sess.add(g_img)
             sess.commit()
         self.write(json.dumps({'status': 'ok'}, ensure_ascii=False))
+
 
 
 # 评论列表
@@ -404,10 +434,13 @@ class Feedment_del(BaseHandler):
         self.redirect('/product_list')
 
 
-# 意见反馈
+#意见反馈
 class Feedback_list(BaseHandler):
-    def get(self, *args, **kwargs):
-        self.render('../templates/feedback_list.html')
+    def get(self,*args,**kwargs):
+        opinion = sess.query(Opinion).all()
+        lens = len(opinion)
+        self.render('../templates/feedback_list.html',opinion=opinion,lens=lens)
+
 
 
 
@@ -487,7 +520,7 @@ class Charts_7(BaseHandler):
         self.render('../templates/charts_7.html')
 
 
-# 系统设置
+# 系统设置（添加）
 class System_base(BaseHandler):
     def get(self, *args, **kwargs):
         self.render('../templates/system_base.html')

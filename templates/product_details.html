@@ -19,46 +19,95 @@
 <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>用户查看</title>
+<title>视频详情</title>
 </head>
 <body>
 <div class="cl pd-20" style=" background-color:#5bacb6">
-	<img class="avatar size-XL l" src="static/h-ui/images/ucnter/avatar-default.jpg">
+	<img class="avatar size-XL l" src="/static/h-ui/images/ucnter/avatar-default.jpg">
 	<dl style="margin-left:80px; color:#fff">
+		
 		<dt>
-			<span class="f-18">张三</span>
-			<span class="pl-10 f-12">余额：40</span>
+			<span class="f-18">{{ video.name }}</span>
+			<span class="pl-10 f-12">年份：{{ video.year }}</span>
 		</dt>
 		<dd class="pt-10 f-12" style="margin-left:0">这家伙很懒，什么也没有留下</dd>
+		
 	</dl>
 </div>
 <div class="pd-20">
 	<table class="table">
 		<tbody>
+			
 			<tr>
-				<th class="text-r" width="80">性别：</th>
-				<td>男</td>
+				<th class="text-r" width="80">地区：</th>
+				<td>{{ video.region }}</td>
 			</tr>
+
 			<tr>
-				<th class="text-r">手机：</th>
-				<td>13000000000</td>
+				<th class="text-r">导演：</th>
+				<td>{{ video.director }}</td>
 			</tr>
+
 			<tr>
-				<th class="text-r">邮箱：</th>
-				<td>admin@mail.com</td>
+				<th class="text-r">简介：</th>
+				<td>{{ video.intro }}</td>
 			</tr>
+
 			<tr>
-				<th class="text-r">地址：</th>
-				<td>北京市 海淀区</td>
+				<th class="text-r">次数：</th>
+				<td>{{ video.amount }}</td>
 			</tr>
+
 			<tr>
-				<th class="text-r">注册时间：</th>
-				<td>2014.12.20</td>
+				<th class="text-r">标签：</th>
+				<td>{{ video.tag }}</td>
 			</tr>
+
 			<tr>
-				<th class="text-r">积分：</th>
-				<td>330</td>
+				<th class="text-r">英文名：</th>
+				<td>{{ video.english_name }}</td>
 			</tr>
+
+			<tr>
+				<th class="text-r">制片人：</th>
+				<td>{{ video.cinemanufacturer }}</td>
+			</tr>
+
+			<tr>
+				<th class="text-r">主演：</th>
+				<td>{{ video.protagonist }}</td>
+			</tr>
+
+			<tr>
+				<th class="text-r">制片成本：</th>
+				<td>{{ video.cost }}</td>
+			</tr>
+
+			<tr>
+				<th class="text-r">编剧：</th>
+				<td>{{ video.scriptwriter }}</td>
+			</tr>
+
+			<tr>
+				<th class="text-r">上映时间：</th>
+				<td>{{ video.release_date }}</td>
+			</tr>
+			
+			<tr>
+				<th class="text-r">票房：</th>
+				<td>{{ video.box_office }}</td>
+			</tr>
+
+			<tr>
+				<th class="text-r">制片年份：</th>
+				<td>{{ video.year }}</td>
+			</tr>
+
+			<tr>
+				<th class="text-r">片长：</th>
+				<td>{{ video.length }}</td>
+			</tr>
+	
 		</tbody>
 	</table>
 </div>
@@ -66,7 +115,7 @@
 <script type="text/javascript" src="/static/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="/static/lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="/static/h-ui/js/H-ui.min.js"></script>
-<script type="text/javascript" src="/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="/static/h-ui.admin/js/H-ui.admin.js"></script> 
 <!--/_footer 作为公共模版分离出去-->
 
 <!--请在下方写此页面业务相关的脚本-->

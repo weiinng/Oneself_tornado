@@ -36,18 +36,73 @@
         <div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>电影名称：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="{{ movie.movie_name }}" placeholder="" id="movie_name" name="movie_name">
+				<input type="text" class="input-text" value="{{ video.name }}" placeholder="" id="name" name="name">
 			</div>
         </div>
 
         <div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">影视导演：</label>
+			<label class="form-label col-xs-4 col-sm-2"> 英文名：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" name="director" id="director" placeholder="" value="{{ movie.director }}" class="input-text">
+				<input type="text" name="english_name" id="english_name" placeholder="" value="{{ video.english_name }}" class="input-text">
+			</div>
+		</div>
+
+
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"> 导演：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="director" id="director" placeholder="" value="{{ video.director }}" class="input-text">
 			</div>
 		</div>
 		
-		<div class="row cl">
+		
+
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">制片人：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="cinemanufacturer" id="cinemanufacturer" placeholder="" value="{{ video.cinemanufacturer }}" class="input-text">
+			</div>
+        </div>
+        
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">主演：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="protagonist" id="protagonist" placeholder="" value="{{ video.protagonist }}" class="input-text">
+			</div>
+        </div>
+            
+
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">编剧：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="scriptwriter" id="scriptwriter" placeholder="" value="{{ video.scriptwriter }}" class="input-text">
+			</div>
+        </div>
+        
+        
+        
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">票房：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="box_office" id="box_office" placeholder="" value="{{ video.box_office }}" class="input-text">
+			</div>
+        </div>
+        
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">片长：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="length" id="length" placeholder="" value="{{ video.length }}" class="input-text">
+			</div>
+        </div>
+        
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">标签：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="tag" id="tag" placeholder="" value="{{ video.tag }}" class="input-text">
+			</div>
+        </div>
+
+        <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>分类栏目：</label>
 			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
 				<select name="classify_id" class="select">
@@ -58,24 +113,39 @@
                 </span>
              </div>
 		</div>
+
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">制片成本：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="cost" id="cost" placeholder="" value="{{ video.cost }}" class="input-text">
+			</div>
+        </div>
+
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">上映时间：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="release_date" id="release_date" placeholder="" value="{{ video.release_date }}" class="input-text">
+			</div>
+        </div>
+
+
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">影片地区：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" name="region" id="region" placeholder="" value="{{ movie.region }}" class="input-text">
+				<input type="text" name="region" id="region" placeholder="" value="{{ video.region }}" class="input-text">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">制片年份：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" name="year" id="year" placeholder="" value="{{ movie.year }}" class="input-text">
+				<input type="text" name="year" id="year" placeholder="" value="{{ video.year }}" class="input-text">
 			</div>
 		</div>
-
-
+        
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">电影简介：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<textarea name="movie_intro" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="$.Huitextarealength(this,200)">{{ movie.movie_intro }}</textarea>
+				<textarea name="intro" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="$.Huitextarealength(this,200)">{{ video.intro }}</textarea>
 				<p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
 			</div>
         </div>
