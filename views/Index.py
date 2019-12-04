@@ -132,10 +132,12 @@ class Product_show(BaseHandler):
 # 添加明星
 class Product_brand_add(BaseHandler):
     def get(self, *args, **kwargs):
-        # movie = sess.query(Movie).all()
-        self.render('../templates/product_brand_add.html')
+        mes = {}
+        mes['data'] = ''
+        self.render('../templates/product_brand_add.html',**mes)
 
     def post(self, *args, **kwargs):
+        mes = {}
         name = self.get_argument('name', '')
         year = self.get_argument('year', '')
         english_name = self.get_argument('english_name', '')
@@ -152,15 +154,26 @@ class Product_brand_add(BaseHandler):
         profession = self.get_argument('profession', '')
         nationality = self.get_argument('nationality', '')
         director = self.get_argument('director', '')
-        celebrity = Big_V(name=name, year=year, region=region, 
-                          nationality=nationality,gender=gender,profession=profession,
-                          director=director,english_name=english_name,nation=nation,    
-                          graduate_academy=graduate_academy,blood_type=blood_type,stature=stature,
-                          weight=weight,constellation=constellation,main_achievements=main_achievements,
-                          in_work=in_work)
-        sess.add(celebrity)
-        sess.commit()
-        self.redirect('/product_brand')
+        if not all([name,year,english_name,nation,graduate_academy,blood_type,stature,weight,constellation,main_achievements,in_work,region,gender,nationality,profession,director]):
+            mes['data'] = '参数不能为空，请重新输入'
+            self.render('../templates/product_brand_add.html',**mes)
+        else:
+            try:
+                sess.query(Big_V).filter(Big_V.name==name).one()
+            except:
+                celebrity = Big_V(name=name, year=year, region=region, 
+                                nationality=nationality,gender=gender,profession=profession,
+                                director=director,english_name=english_name,nation=nation,    
+                                graduate_academy=graduate_academy,blood_type=blood_type,stature=stature,
+                                weight=weight,constellation=constellation,main_achievements=main_achievements,
+                                in_work=in_work)
+                sess.add(celebrity)
+                sess.commit()
+                self.redirect('/product_brand')
+            else:
+                mes['data'] = '此明星已存在，可添加其他'
+                self.render('../templates/product_brand_add.html',**mes)    
+
 
 
 # 删除明星
@@ -250,14 +263,27 @@ class Product_category(BaseHandler):
 class Product_category_add(BaseHandler):
     def get(self, *args, **kwargs):
         classify = sess.query(Classify).all()
-        self.render('../templates/product_category_add.html', classify=classify)
-
+        mes = {}
+        mes['data'] = ''
+        self.render('../templates/product_category_add.html', classify=classify,**mes)
     def post(self, *args, **kwargs):
+        classify = sess.query(Classify).all()
+        mes = {}
         name = self.get_argument('name', '')
-        classify = Classify(name=name)
-        sess.add(classify)
-        sess.commit()
-        self.redirect('/product_category_add')
+        if not name:
+            mes['data'] = '参数不能为空，请重新输入'
+            self.render('../templates/product_category_add.html',classify=classify,**mes)
+        else:
+            try:
+                sess.query(Classify).filter(Classify.name==name).one()
+            except:
+                classify = Classify(name=name)
+                sess.add(classify)
+                sess.commit()
+                self.redirect('/product_category_add')
+            else:
+                 mes['data'] = '此分类已存在，可添加其他'
+                 self.render('../templates/product_category_add.html',classify=classify,**mes)
 
 
 # 删除分类
@@ -328,8 +354,12 @@ class Product_details(BaseHandler):
 class Product_add(BaseHandler):
     def get(self, *args, **kwargs):
         classify = sess.query(Classify).all()
-        self.render('../templates/product_add.html', classify=classify)
+        mes = {}
+        mes['data'] = ''
+        self.render('../templates/product_add.html', classify=classify,**mes)
     def post(self, *args, **kwargs):
+        classify = sess.query(Classify).all()
+        mes = {}
         name = self.get_argument('name', '')
         region = self.get_argument('region', '')
         year = self.get_argument('year', '')
@@ -344,15 +374,25 @@ class Product_add(BaseHandler):
         box_office = self.get_argument('box_office', '')
         length = self.get_argument('length', '')
         tag = self.get_argument('tag', '')
-        movie = Video(
-            name=name,region=region, year=year,director=director,
-            intro=intro,english_name=english_name,cinemanufacturer=cinemanufacturer,
-            protagonist=protagonist,cost=cost,scriptwriter=scriptwriter,
-            release_date=release_date,box_office=box_office,length=length,
-            tag=tag)
-        sess.add(movie)
-        sess.commit()
-        self.redirect('/product_list')
+        if not all([name,region,year,director,intro,english_name,cinemanufacturer,protagonist,cost,scriptwriter,release_date,box_office,length,tag]):
+            mes['data'] = "参数不能为空,请重新输入"
+            self.render('../templates/product_add.html', classify=classify,**mes)
+        else:
+            try:
+                sess.query(Video).filter(Video.name==name).one()
+            except:
+                movie = Video(
+                    name=name,region=region, year=year,director=director,
+                    intro=intro,english_name=english_name,cinemanufacturer=cinemanufacturer,
+                    protagonist=protagonist,cost=cost,scriptwriter=scriptwriter,
+                    release_date=release_date,box_office=box_office,length=length,
+                    tag=tag)
+                sess.add(movie)
+                sess.commit()
+                self.redirect('/product_list')
+            else:
+                mes['data'] = "此商品已存在，可添加其他"
+                self.render('../templates/product_add.html', classify=classify,**mes)
 
 
 # 删除视频
@@ -378,11 +418,29 @@ class Product_edit(BaseHandler):
         year = self.get_argument('year', '')
         director = self.get_argument('director', '')
         intro = self.get_argument('intro', '')
+        english_name = self.get_argument('english_name', '')
+        cinemanufacturer = self.get_argument('cinemanufacturer', '')
+        protagonist = self.get_argument('protagonist', '')
+        cost = self.get_argument('cost', '')
+        scriptwriter = self.get_argument('scriptwriter', '')
+        release_date = self.get_argument('release_date', '')
+        box_office = self.get_argument('box_office', '')
+        length = self.get_argument('length', '')
+        tag = self.get_argument('tag', '')
         p.name = name
         p.region = region
         p.year = year
         p.director = director
         p.intro = intro
+        p.english_name = english_name
+        p.cinemanufacturer = cinemanufacturer
+        p.protagonist = protagonist
+        p.cost = cost
+        p.scriptwriter = scriptwriter
+        p.release_date = release_date
+        p.box_office = box_office
+        p.length = length
+        p.tag = tag
         sess.commit()
         self.redirect('/product_list')
 
@@ -524,6 +582,13 @@ class Charts_7(BaseHandler):
 class System_base(BaseHandler):
     def get(self, *args, **kwargs):
         self.render('../templates/system_base.html')
+
+
+
+
+
+
+        
 
 
 # 栏目管理

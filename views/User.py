@@ -20,7 +20,7 @@ class User_list(BaseHandler):
             u_dict['create_time'] = i.create_time   
             u_dict['is_activate'] = i.is_activate
             u_list.append(u_dict)
-        self.render('../templates/user-list.html',user=u_list,lens=lens)
+        self.render('../templates/member_list.html',user=u_list,lens=lens)
     def post(self,*args,**kwargs):
         title = self.get_argument('title','')
         user = sess.query(User).filter(User.name.like('%' + title + '%')).all()
@@ -38,7 +38,7 @@ class User_list(BaseHandler):
             u_dict['create_time'] = i.create_time   
             u_dict['is_activate'] = i.is_activate
             u_list.append(u_dict)
-        self.render('../templates/user-list.html',user=u_list,lens=lens)
+        self.render('../templates/member_list.html',user=u_list,lens=lens)
 
 
 
@@ -68,18 +68,31 @@ class User_list(BaseHandler):
 # 添加用户
 class Member_add(BaseHandler):
     def get(self,*args,**kwargs):
-        self.render('../templates/member_add.html')
+        mes = {}
+        mes['data'] = ''
+        self.render('../templates/member_add.html',**mes)
     def post(self):
+        mes = {}
         name = self.get_argument('name','')
         gender = self.get_argument('gender','')
         phone = self.get_argument('phone','')
         email = self.get_argument('email','')
         age = self.get_argument('age','')
         birthplace = self.get_argument('birthplace','')
-        user = User(name=name,gender=gender,phone=phone,birthplace=birthplace,email=email,age=age)
-        sess.add(user)
-        sess.commit()
-        self.redirect('/user_list')
+        if not all([name,gender,phone,email,age,birthplace]):
+            mes['data'] = '参数不能为空,请重新输入'
+            self.render('../templates/member_add.html',**mes)
+        else:
+            try:
+                sess.query(User).filter(User.name==name).one()
+            except:
+                user = User(name=name,gender=gender,phone=phone,birthplace=birthplace,email=email,age=age)
+                sess.add(user)
+                sess.commit()
+                self.redirect('/user_list')
+            else:
+                mes['data'] = '此用户名已被占用'
+                self.render('../templates/member_add.html',**mes)
 
 
 
