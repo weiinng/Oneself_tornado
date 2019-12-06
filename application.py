@@ -60,6 +60,16 @@ class Application(tornado.web.Application):
             (r"/product_category", Index.Product_category),  # 分类管理
             (r"/product_category_add", Index.Product_category_add),  # 添加分类
             (r"/category_del/(\d+)", Index.Category_del),  # 删除分类
+            
+            (r"/product_column", Index.Product_column),  # 栏目管理
+            (r"/product_column_add", Index.Product_column_add),  # 添加栏目
+            (r"/column_del/(\d+)", Index.Column_del),  # 删除栏目
+
+            
+            (r"/product_label", Index.Product_label),  # 标签管理
+            (r"/product_label_add", Index.Product_label_add),  # 添加标签 
+            (r"/label_del/(\d+)", Index.Label_del),  # 删除标签
+
 
 
             (r"/product_list", Index.Product_list),  # 视频管理
@@ -68,6 +78,10 @@ class Application(tornado.web.Application):
             (r"/product_edit/(\d+)", Index.Product_edit),  # 修改视频
             (r"/product_details/(\d+)", Index.Product_details),  # 视频详情
             (r"/upload_product/(\d+)", Index.Upload_product),  # 视频图片上传
+
+
+            (r"/product_micro", Index.Product_micro),  # 微视频管理
+            (r"/product_video_add", Index.Product_video_add),  # 添加微视频 
 
 
             (r"/feedment_list", Index.Feedment_list),  # 评论列表

@@ -21,6 +21,7 @@ Base = declarative_base(bind=engine)
 class IdBase(object):
     id = Column(Integer, primary_key=True, autoincrement=True)
 
+
 #管理员用户
 class AdminUser(Base,IdBase):
     __tablename__ = "adminuser"
@@ -64,7 +65,7 @@ class Video(Base,IdBase):
     year = Column(String(100))                   #制片年份 （必填）
     region = Column(String(100))                 #影片地区 （必填）
     length = Column(String(100))                 #片长  
-    types = Column(Integer)                      #类型   必需字段 0为短视频 1为电影  
+    types = Column(Integer)                      #类型 
     tag = Column(String(100))                    #影片标签
     resolution = Column(String(100))             #分辨率
     path = Column(String(100))                   #播放路径  （必填）
@@ -79,7 +80,6 @@ class Video(Base,IdBase):
     is_selection = Column(Integer,default=0)     #是否为精选 默认为否
     is_audit = Column(Integer,default=0)         #视频来源 》主管理员可以不需要审核，其他需要主管理员审核
     is_show = Column(Integer,default=0)          #0为显示  1为不显示
-
 
 
 
@@ -101,13 +101,29 @@ class ClassAndvideo(Base,IdBase):
 
 
 
+# 栏目表
+class Columns(Base,IdBase):
+    __tablename__ = "columns"
+    name = Column(String(100))                                  #栏目名称
+    creation_time = Column(DateTime(),default=datetime.now)     #创建时间（精确到秒）
+
+
+# 标签表
+class Label(Base,IdBase):
+    __tablename__ = "label"
+    name = Column(String(100))                                  #标签名称
+    creation_time = Column(DateTime(),default=datetime.now)     #发布时间（精确到秒）
+
+
 
 # 微视频表
 class Micro_video(Base,IdBase):
     __tablename__ = "micro_video"
-    name = Column(String(100))                   #微视频内容标题(必填)
-    director = Column(Integer)                   #用户id
-    length = Column(String(100))                 #片长
+    name = Column(String(100))                               #微视频内容标题(必填)
+    length = Column(String(100))                             #片长
+    issue_time = Column(DateTime(),default=datetime.now)     #发布时间（精确到秒）
+    is_show = Column(Integer,default=0)                      #发布状态
+    user_id = Column(Integer)                                #用户id
 
 
 
@@ -145,8 +161,8 @@ class Identity(Base,IdBase):
 
 #大V and 身份
 class V_and_identity(Base,IdBase):
-    __tablename__ = "v_and_identity"
-    v_id = Column(Integer)
+    __tablename__ = "v_and_identity"     
+    v_id = Column(Integer)           
     identity_id = Column(Integer)
 
 
@@ -172,8 +188,6 @@ class Comment(Base,IdBase):
     micro_video_id = Column(Integer)                         #微视频id
 
 
-
-
 #用户收藏表
 class Collect(Base,IdBase):
     __tablename__ = "collect"
@@ -191,7 +205,7 @@ class Attention(Base,IdBase):
     user_id = Column(Integer)               #用户id
     big_v_id = Column(Integer)              #视频id
     micro_video_id = Column(Integer)        #微视频id
-    types = Column(Integer)             #关注的类型 1为栏目，2为明星 3为导演 4位主持人
+    types = Column(Integer)                 #关注的类型 1为栏目，2为明星 3为导演 4位主持人
 
 
 
@@ -202,6 +216,7 @@ class Praise(Base,IdBase):
     movie_id = Column(Integer)               #电影id
     micro_video_id = Column(Integer)         #微视频id
     pratype = Column(Integer)                #点赞类型 1为视频点赞  2为大V点赞
+
 
 
 

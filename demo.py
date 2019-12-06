@@ -1,6 +1,7 @@
 #多对多查询分类
 from models import *
 
+
 # claandvideo = sess.query(ClassAndvideo).all()
 # for a in claandvideo:
     # print(a.id)

@@ -31,145 +31,30 @@
 <body>
 <div class="page-container">
 	<form action="" method="post" class="form form-horizontal" id="form-article-add">
-                
-        <b style="color: red">{{ data }}</b></br>
-
+        
+            <b style="color: red">{{ data }}</b></br>
+        
         <div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>姓名：</label>
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>微视频标题：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" class="input-text" value="" placeholder="" id="name" name="name">
 			</div>
         </div>
 
-        <div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>英文名：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="english_name" name="english_name">
-			</div>
-        </div>
-
-
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">性别：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                    <div class="radio-box">
-                            <input name="gender" type="radio" id="sex-1" checked value="男">
-                            <label for="sex-1">男</label>
-                    </div>
-                    <div class="radio-box">
-                        <input type="radio" id="sex-2" name="gender" value="女">
-                        <label for="sex-2">女</label>
-                    </div>
-            </div>
-        </div>
-
-
-        <div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">血型：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" name="blood_type" id="blood_type" placeholder="" value="" class="input-text">
-			</div>
-        </div>
-
-        <div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">身高：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" name="stature" id="stature" placeholder="" value="" class="input-text">
-			</div>
-        </div>
-
-        <div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">体重：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" name="weight" id="weight" placeholder="" value="" class="input-text">
-			</div>
-        </div>
-
-        <div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">星座：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" name="constellation" id="constellation" placeholder="" value="" class="input-text">
-			</div>
-        </div>
-
-
-
-
-        <div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">生日：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" name="year" id="year" placeholder="" value="" class="input-text">
-			</div>
-        </div>
-        
-
-        
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2">民族：</label>
-                <div class="formControls col-xs-8 col-sm-9">
-                    <input type="text" name="nation" id="nation" placeholder="" value="" class="input-text">
-                </div>
-            </div>
-
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">国籍：</label>
+			<label class="form-label col-xs-4 col-sm-2">片长：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" name="nationality" id="nationality" placeholder="" value="" class="input-text">
+				<input type="text" name="length" id="length" placeholder="" value="" class="input-text">
 			</div>
-        </div>
+		</div>
 
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2">职业：</label>
-                <div class="formControls col-xs-8 col-sm-9">
-                    <input type="text" name="profession" id="profession" placeholder="" value="" class="input-text">
-                </div>
-            </div>
-
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2">出生地：</label>
-                <div class="formControls col-xs-8 col-sm-9">
-                    <input type="text" name="director" id="director" placeholder="" value="" class="input-text" style=" width:25%">
-                </div>
-            </div>
-
-
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2">毕业院校：</label>
-                <div class="formControls col-xs-8 col-sm-9">
-                    <input type="text" name="graduate_academy" id="graduate_academy" placeholder="" value="" class="input-text">
-                </div>
-            </div>
-
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2">主要成就：</label>
-                <div class="formControls col-xs-8 col-sm-9">
-                    <input type="text" name="main_achievements" id="main_achievements" placeholder="" value="" class="input-text">
-                </div>
-            </div>
-    
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2">代表作品：</label>
-                <div class="formControls col-xs-8 col-sm-9">
-                    <input type="text" name="in_work" id="in_work" placeholder="" value="" class="input-text">
-                </div>
-            </div>
-
-
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">简介：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<textarea name="region" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="$.Huitextarealength(this,200)"></textarea>
-				<p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
-			</div>
-        </div>
         
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
 				<button  class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存提交</button>
 				<!-- <button onClick="article_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存草稿</button> -->
 				<button  class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
-
-            </div>
+			</div>
 		</div>
 	</form>
 </div>

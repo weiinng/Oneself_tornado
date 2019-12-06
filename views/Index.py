@@ -243,7 +243,7 @@ class Product_category(BaseHandler):
 # 添加分类
 class Product_category_add(BaseHandler):
     def get(self, *args, **kwargs):
-        classify = sess.query(Classify).one()
+        classify = sess.query(Classify).all()
         mes = {}
         mes['data'] = ''
         self.render('../templates/product_category_add.html', classify=classify,**mes)
@@ -354,7 +354,8 @@ class Product_add(BaseHandler):
         box_office = self.get_argument('box_office', '')
         length = self.get_argument('length', '')
         tag = self.get_argument('tag', '')
-        if not all([name,region,year,director,intro,english_name,cinemanufacturer,protagonist,cost,scriptwriter,release_date,box_office,length,tag]):
+        types = self.get_argument('types', '')
+        if not all([name,region,year,director,intro,types,english_name,cinemanufacturer,protagonist,cost,scriptwriter,release_date,box_office,length,tag]):
             mes['data'] = "参数不能为空,请重新输入"
             self.render('../templates/product_add.html', classify=classify,**mes)
         else:
@@ -362,7 +363,7 @@ class Product_add(BaseHandler):
                 sess.query(Video).filter(Video.name==name).one()
             except:
                 movie = Video(
-                    name=name,region=region, year=year,director=director,
+                    name=name,region=region, year=year,director=director,types=types,
                     intro=intro,english_name=english_name,cinemanufacturer=cinemanufacturer,
                     protagonist=protagonist,cost=cost,scriptwriter=scriptwriter,
                     release_date=release_date,box_office=box_office,length=length,
@@ -407,6 +408,7 @@ class Product_edit(BaseHandler):
         box_office = self.get_argument('box_office', '')
         length = self.get_argument('length', '')
         tag = self.get_argument('tag', '')
+        types = self.get_argument('types', '')
         p.name = name
         p.region = region
         p.year = year
@@ -421,6 +423,7 @@ class Product_edit(BaseHandler):
         p.box_office = box_office
         p.length = length
         p.tag = tag
+        p.types = types
         sess.commit()
         self.redirect('/product_list')
 
@@ -452,6 +455,161 @@ class Upload_product(BaseHandler):
             sess.add(g_img)
             sess.commit()
         self.write(json.dumps({'status': 'ok'}, ensure_ascii=False))
+
+
+
+ 
+# 微视频管理
+class Product_micro(BaseHandler):
+    def get(self, *args, **kwargs):
+        micro_video = sess.query(Micro_video).all()
+        lens = len(micro_video)
+        m_list = []
+        for i in micro_video:
+            m_dict = {}
+            m_dict['id'] = i.id
+            m_dict['name'] = i.name
+            m_dict['length'] = i.length
+            m_dict['is_show'] = i.is_show
+            m_list.append(m_dict)
+        self.render('../templates/product_micro.html', micro_video=m_list, lens=lens)
+    def post(self, *args, **kwargs):
+        title = self.get_argument('title', '')
+        micro_video = sess.query(Micro_video).filter(Micro_video.name.like('%' + title + '%')).all()
+        lens = len(micro_video)
+        m_list = []
+        for i in micro_video:
+            m_dict = {}
+            m_dict['id'] = i.id
+            m_dict['name'] = i.name
+            m_dict['length'] = i.length
+            m_dict['is_show'] = i.is_show
+            m_list.append(m_dict)
+        self.render('../templates/product_micro.html', micro_video=m_list, lens=lens)
+
+
+# 添加微视频
+class Product_video_add(BaseHandler):
+    def get(self, *args, **kwargs):
+        mes = {}
+        mes['data'] = ''
+        self.render('../templates/product_video_add.html',**mes)
+    def post(self, *args, **kwargs):
+        mes = {}
+        mes['data'] = ''
+        length = self.get_argument('length', '')
+        name = self.get_argument('name', '')
+        if not all([name,length]):
+            mes['data'] = "参数不能为空,请重新输入"
+            self.render('../templates/product_video_add.html',**mes)
+        else:
+            try:
+                sess.query(Micro_video).filter(Micro_video.name==name).one()
+            except:
+                micro_video = Micro_video(
+                    name=name,length=length)
+                sess.add(micro_video)
+                sess.commit()
+                self.redirect('/product_micro')
+            else:
+                mes['data'] = "此商品已存在，可添加其他"
+                self.render('../templates/product_video_add.html',**mes)
+        self.render('../templates/product_video_add.html',**mes)
+
+
+# 栏目列表
+class Product_column(BaseHandler):
+    def get(self, *args, **kwargs):
+
+        self.render('../templates/product_column.html')
+
+
+# # 添加栏目
+class Product_column_add(BaseHandler):
+    def get(self, *args, **kwargs):
+        columns = sess.query(Columns).all()
+        mes = {}
+        mes['data'] = ''
+        self.render('../templates/product_column_add.html', columns=columns,**mes)
+    def post(self, *args, **kwargs):
+        columns = sess.query(Columns).all()
+        mes = {}
+        name = self.get_argument('name', '')
+        if not name:
+            mes['data'] = '参数不能为空，请重新输入'
+            self.render('../templates/product_column_add.html',columns=columns,**mes)
+        else:
+            try:
+                sess.query(Columns).filter(Columns.name==name).one()
+            except:
+                columns = Columns(name=name)
+                sess.add(columns)
+                sess.commit()
+                self.redirect('/product_column_add')
+            else:
+                 mes['data'] = '此分类已存在，可添加其他'
+                 self.render('../templates/Product_column_add.html',columns=columns,**mes)
+
+
+
+# 删除栏目
+class Column_del(BaseHandler):
+    def get(self, id):
+        columns = sess.query(Columns).filter(Columns.id == id).one()
+        sess.delete(columns)
+        sess.commit()
+        self.redirect('/product_column_add')
+
+
+
+# 标签列表
+class Product_label(BaseHandler):
+    def get(self, *args, **kwargs):
+
+        self.render('../templates/product_label.html')
+
+
+# 添加标签
+class Product_label_add(BaseHandler):
+    def get(self, *args, **kwargs):
+        label = sess.query(Label).all()
+        mes = {}
+        mes['data'] = ''
+        self.render('../templates/product_label_add.html', label=label,**mes)
+    def post(self, *args, **kwargs):
+        label = sess.query(Label).all()
+        mes = {}
+        name = self.get_argument('name', '')
+        if not name:
+            mes['data'] = '参数不能为空，请重新输入'
+            self.render('../templates/product_label_add.html',label=label,**mes)
+        else:
+            try:
+                sess.query(Label).filter(Label.name==name).one()
+            except:
+                label = Label(name=name)
+                sess.add(label)
+                sess.commit()
+                self.redirect('/product_label_add')
+            else:
+                 mes['data'] = '此分类已存在，可添加其他'
+                 self.render('../templates/product_label_add.html',label=label,**mes)
+
+
+
+# 删除标签
+class Label_del(BaseHandler):
+    def get(self, id):
+        label = sess.query(Label).filter(Label.id == id).one()
+        sess.delete(label)
+        sess.commit()
+        self.redirect('/product_label_add')
+
+
+
+
+
+
 
 
 
