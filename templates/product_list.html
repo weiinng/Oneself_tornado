@@ -61,12 +61,11 @@
 					<tr class="text-c va-m">
 						<td><input name="" type="checkbox" value=""></td>
 						<td>{{ i['id'] }}</td>
-                        <td class="price"><a href="/product_details/{{ i['id'] }}">{{ i['name'] }}</a></td>
+                        <td class="price"><b><a href="/product_details/{{ i['id'] }}">{{ i['name'] }}</a></b></td>
 						<td><span class="price">{{ i['director'] }}</span></td>
-						<td class="price"><a style="text-decoration:none" onClick="product_show('哥本哈根橡木地板','product-show.html','10001')" href="/product_show"><img title="国内品牌" src="/static/h-ui.admin/images/cn.gif"> <b class="text-success">{{ i['region'] }}</b></a></td>
+						<td class="price"><b class="text-success">{{ i['region'] }}</b></td>
 						<td><span class="price">{{ i['protagonist'] }}</span></td>
 						<td><span class="price">{{ i['box_office'] }}</span></td>
-						<!-- <td><span class="price"></span>{{ i['intro'] }}</td> -->
 						<td class="td-status">
 							{% if i['is_show'] == 0 %}
 							<span class="label label-success radius">已发布</span>

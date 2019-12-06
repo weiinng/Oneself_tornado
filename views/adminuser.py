@@ -36,19 +36,31 @@ class Admin_list(BaseHandler):
 #管理员添加等操作
 class Admin_add(BaseHandler):
     def get(self, *args, **kwargs):
-        self.render("../templates/admin_add.html")
+        mes = {}
+        mes['data'] = ''
+        self.render("../templates/admin_add.html",**mes)
     def post(self, *args, **kwargs):
+        mes = {}
+        mes['data'] = ''
         user = self.get_argument("adminName","")
         account = self.get_argument("adminAccount", "")
         password = self.get_argument("password", "")
         role = self.get_argument("adminRole",0)
-        add_admin = AdminUser(username=user,account=account,password=password,is_super=role)
-        try:
-            sess.add(add_admin)
-            sess.commit()
-            self.write("添加成功！")
-        except:
-            self.write("添加失败！")
+        if not all([user,account,password,role]):
+            mes['data'] = "参数不能为空,请重新输入"
+            self.render('../templates/admin_add.html',**mes)
+        else:
+            try:
+                sess.query(AdminUser).filter(AdminUser.name==name).one()
+            except:
+                adminUser = AdminUser(
+                    username=user,account=account,password=password,is_super=role)
+                sess.add(adminUser)
+                sess.commit()
+                self.redirect('/product_micro')
+            else:
+                mes['data'] = "此商品已存在，可添加其他"
+                self.render('../templates/admin_add.html',**mes)
 
 
 #管理员编辑
@@ -70,7 +82,7 @@ class Admin_compile(BaseHandler):
             adminuser.password = password
             adminuser.is_super = role
             sess.commit()
-            self.write("修改成功！")
+            self.redirect('/admin_list')
         except:
             self.write("修改失败！")
 

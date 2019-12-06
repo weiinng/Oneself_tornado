@@ -52,7 +52,6 @@
 					<th width="250">职业</th>
 					<th width="120">性别</th>
 					<th width="120">民族</th>
-					<!-- <th>简介</th> -->
 					<th>操作</th>
 				</tr>
 			</thead>
@@ -61,14 +60,12 @@
 				<tr class="text-c">
 					<td><input name="" type="checkbox" value=""></td>
 					<td>{{ i['id'] }}</td>
-					<td><a href="/product_show/{{ i['id'] }}">{{ i['name'] }}</a></td>
-					<td class="price" class="input-text text-c"><img title="国内品牌" src="/static/h-ui.admin/images/cn.gif"> {{ i['nationality'] }}</td>
+					<td><b><a href="/product_show/{{ i['id'] }}">{{ i['name'] }}</a></b></td>
+					<td class="price" class="input-text text-c">{{ i['nationality'] }}</td>
 					<td>{{ i['year'] }}</td>
 					<td>{{ i['profession'] }}</td>
 					<td>{{ i['gender'] }}</td>
 					<td>{{ i['nation'] }}</td>
-
-					<!-- <td>{{ i['region'] }}</td> -->
 					<td class="f-14 product-brand-manage">
 						<a style="text-decoration:none"  href="/upload_brand/{{ i['id'] }}" title="图片"><i class="Hui-iconfont"></i></a>
 						<a style="text-decoration:none" onClick="product_brand_edit('品牌编辑','codeing.html','1')" href="/product_brand_edit/{{ i['id'] }}" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>

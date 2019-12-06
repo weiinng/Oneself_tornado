@@ -51,14 +51,28 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2">性别：</label>
             <div class="formControls col-xs-8 col-sm-9">
+
+
+                    {% if celebrity.gender == "男" %}
                     <div class="radio-box">
-                            <input name="gender" type="radio" id="sex-1" checked value="男">
-                            <label for="sex-1">男</label>
+                        <input name="gender" type="radio" id="sex-1" checked value="男">
+                        <label for="sex-1">男</label>
                     </div>
                     <div class="radio-box">
                         <input type="radio" id="sex-2" name="gender" value="女">
                         <label for="sex-2">女</label>
                     </div>
+                    {% elif celebrity.gender == "女" %}
+                    <div class="radio-box">
+                            <input name="gender" type="radio" id="sex-1"  value="男">
+                            <label for="sex-1">男</label>
+                        </div>
+                        <div class="radio-box">
+                            <input type="radio" id="sex-2" name="gender" checked value="女">
+                            <label for="sex-2">女</label>
+                        </div>
+                        {% end %}
+                   
             </div>
         </div>
 

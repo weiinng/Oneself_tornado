@@ -520,7 +520,6 @@ class Product_video_add(BaseHandler):
 # 栏目列表
 class Product_column(BaseHandler):
     def get(self, *args, **kwargs):
-
         self.render('../templates/product_column.html')
 
 
@@ -549,7 +548,6 @@ class Product_column_add(BaseHandler):
             else:
                  mes['data'] = '此分类已存在，可添加其他'
                  self.render('../templates/Product_column_add.html',columns=columns,**mes)
-
 
 
 # 删除栏目
@@ -607,18 +605,13 @@ class Label_del(BaseHandler):
 
 
 
-
-
-
-
-
-
 # 评论列表
 class Feedment_list(BaseHandler):
     def get(self, *args, **kwargs):
         comment = sess.query(Comment).all()
         lens = len(comment)
         self.render('../templates/feedment_list.html', comment=comment, lens=lens)
+
 
 
 # 删除评论
@@ -630,15 +623,13 @@ class Feedment_del(BaseHandler):
         self.redirect('/product_list')
 
 
+
 #意见反馈
 class Feedback_list(BaseHandler):
     def get(self,*args,**kwargs):
         opinion = sess.query(Opinion).all()
         lens = len(opinion)
         self.render('../templates/feedback_list.html',opinion=opinion,lens=lens)
-
-
-
 
 
 
