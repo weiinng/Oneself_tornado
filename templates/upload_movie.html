@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<form  enctype="multipart/form-data" method='post'>
+
+
+        <input type='file' name='file'/><br/>
+        <input type='submit' value='上传'/>
+        
+        <br>
+        
+        {% for i in movie %}
+        <video src="../static/files/{{ i.movie_name }}" controls="controls" autoplay="autoplay" width="400" height="250" muted></video>
+        {% end %}
+
+</form>
+    
+</body>
+</html>

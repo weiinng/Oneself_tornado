@@ -98,8 +98,6 @@ class Application(tornado.web.Application):
 
 
 
-
-
             (r"/charts_1", Index.Charts_1),  # 折线图
             (r"/charts_2", Index.Charts_2),  # 时间轴折线图
             (r"/charts_3", Index.Charts_3),  # 区域图
@@ -109,6 +107,7 @@ class Application(tornado.web.Application):
             (r"/charts_7", Index.Charts_7),  # 3D饼状图
 
 
+
             (r"/system_base", Index.System_base),  # 系统设置
             (r"/system_category", Index.System_category),  # 栏目管理
             (r"/system_data", Index.System_data),  # 数据字典
@@ -116,17 +115,15 @@ class Application(tornado.web.Application):
             (r"/system_log", Index.System_log),  # 系统日志
 
 
+
             (r"/article_add", Index.Article_add),  # 添加资讯
             (r"/picture_add", Index.Picture_add),  # 添加图片
             (r"/product_add", Index.Product_add),  # 添加产品
 
 
+
             (r'/upload_video/(\d+)', Index.Upload_video),       #微视频 上传视频
-
-            
-
-
-
+            (r'/upload_movie', Index.Upload_movie),             #视频展示
 
 
         ]

@@ -7,28 +7,34 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="page-container">
 
-<form  enctype="multipart/form-data" method='post'>
-
- 
-        <label class="form-label col-xs-4 col-sm-2">选择微视频</label>
-            <select name="goods" id="goods">
-                <option value="{{ micro_video.id }}">{{ micro_video.name }}</option>
-            </select>
-            <br>
-   
-    <br>
-        <input type='file' name='file'/><br/>
-        <input type='submit' value='上传'/>
-        
-
-        <br>
-        
-        {% for i in movie %}
-        <video src="../static/files/{{ i.movie_name }}" controls="controls" width="200" height="150" ></video>
-        {% end %}
-
-</form>
+        <form  enctype="multipart/form-data" method='post'>
     
+    
+        <div>
+            <label class="form-label col-xs-4 col-sm-2">选择微视频</label>
+                <select name="goods" id="goods">
+                    <option value="{{ micro_video.id }}">{{ micro_video.name }}</option>
+                </select>
+                <br>
+        </div>
+        
+            <input type='file' name='file'/><br/>
+            <input type='submit' value='上传微视频'/>
+            
+    
+            <br>
+            
+            {% for i in movie %}
+            <video src="../static/files/{{ i.movie_name }}" controls="controls" autoplay="autoplay" width="400" height="250" ></video>
+            {% end %}
+            
+        
+    
+        </form>
+    
+    
+    </div>
 </body>
 </html>

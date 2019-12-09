@@ -869,6 +869,37 @@ class Upload_video(BaseHandler):
 
 
 
+#上传视频
+class Upload_movie(BaseHandler):
+    def get(self, *args, **kwargs):
+        movie = sess.query(Movie).all()
+        self.render('../templates/upload_movie.html', movie=movie)
+
+    def post(self, *args, **kwargs):
+        ret = {'result': 'OK'}
+
+        upload_path = os.path.dirname(os.path.dirname(__file__))+"/static/files/"      #文件的暂存路径
+
+        file_metas = self.request.files.get('file', None)  # 提取表单中‘name’为‘file’的文件元数据
+
+        if not file_metas:
+            ret['result'] = 'Invalid Args'
+            return ret
+
+        for meta in file_metas:
+            filename = meta['filename']
+            file_path = os.path.join(upload_path, filename)
+
+            with open(file_path, 'wb') as up:
+                up.write(meta['body'])
+            
+            g_img = Movie(movie_name= filename)
+            sess.add(g_img)
+            sess.commit()
+            print(g_img)
+
+        self.redirect('/upload_movie')
+
 
 # class IndexHandler(BaseHandler):
 #     def get(self, *args, **kwargs):
