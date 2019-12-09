@@ -121,5 +121,13 @@ class Application(tornado.web.Application):
             (r"/product_add", Index.Product_add),  # 添加产品
 
 
+            (r'/upload_video/(\d+)', Index.Upload_video),       #微视频 上传视频
+
+            
+
+
+
+
+
         ]
         super(Application, self).__init__(handlers, **config.setting)

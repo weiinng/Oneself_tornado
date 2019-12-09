@@ -3,11 +3,12 @@ from models import *
 import json
 
 
+
+
 # 后台首页
 # 首页
 class Index(BaseHandler):
     def get(self, *args, **kwargs):
-
         self.render('../templates/index.html')
 
 
@@ -18,12 +19,14 @@ class Welcome(BaseHandler):
         self.render('../templates/welcome.html')
 
 
+
 # 视频管理
 class Article_list(BaseHandler):
     def get(self, *args, **kwargs):
         video = sess.query(Video).all()
         lens = len(video)
         self.render('../templates/article_list.html', lens=lens)
+
 
 
 # 上传视频
@@ -33,10 +36,12 @@ class Article_add(BaseHandler):
         self.render('../templates/article_add.html', movie=movie)
 
 
+
 # 图片管理
 class Picture_list(BaseHandler):
     def get(self, *args, **kwargs):
         self.render('../templates/picture_list.html')
+
 
 
 # 添加图片
@@ -46,16 +51,19 @@ class Picture_add(BaseHandler):
         self.render('../templates/picture_add.html', movie=movie)
 
 
+
 # 图片展示
 class Picture_show(BaseHandler):
     def get(self, *args, **kwargs):
         self.render('../templates/picture_show.html')
 
 
+
 # 删除图片
 class Picture_del(BaseHandler):
     def get(self, id):
         self.redirect('/picture_list')
+
 
 
 # 明星管理
@@ -93,7 +101,7 @@ class Product_brand(BaseHandler):
             c_dict['gender'] = i.gender
             c_dict['region'] = i.region
             c_dict['nationality'] = i.nationality
-            c_dict['director'] = i.directornation
+            c_dict['director'] = i.director
             c_dict['nation'] = i.nation
             c_list.append(c_dict)
         self.render('../templates/product_brand.html', celebrity=c_list, lens=lens)
@@ -106,7 +114,6 @@ class Product_show(BaseHandler):
     def get(self,id):
         big_v = sess.query(Big_V).filter(Big_V.id == id ).one()
         self.render('../templates/product_show.html',big_v=big_v)
-
 
 
 
@@ -135,7 +142,9 @@ class Product_brand_add(BaseHandler):
         profession = self.get_argument('profession', '')
         nationality = self.get_argument('nationality', '')
         director = self.get_argument('director', '')
-        if not all([name,year,english_name,nation,graduate_academy,blood_type,stature,weight,constellation,main_achievements,in_work,region,gender,nationality,profession,director]):
+        if not all([name,year,english_name,nation,graduate_academy,blood_type,
+        stature,weight,constellation,main_achievements,in_work,region,gender,nationality,
+        profession,director]):
             mes['data'] = '参数不能为空，请重新输入'
             self.render('../templates/product_brand_add.html',**mes)
         else:
@@ -166,6 +175,7 @@ class Active_del(BaseHandler):
         self.redirect('/product_brand')
 
 
+
 # 修改明星
 class Product_brand_edit(BaseHandler):
     def get(self, id):
@@ -187,6 +197,7 @@ class Product_brand_edit(BaseHandler):
         p.director = director
         sess.commit()
         self.redirect('/product_brand')
+
 
 
 import os 
@@ -267,6 +278,7 @@ class Product_category_add(BaseHandler):
                  self.render('../templates/product_category_add.html',classify=classify,**mes)
 
 
+
 # 删除分类
 class Category_del(BaseHandler):
     def get(self, id):
@@ -330,6 +342,7 @@ class Product_details(BaseHandler):
 
 
 
+
 # 添加视频
 class Product_add(BaseHandler):
     def get(self, *args, **kwargs):
@@ -355,7 +368,9 @@ class Product_add(BaseHandler):
         length = self.get_argument('length', '')
         tag = self.get_argument('tag', '')
         types = self.get_argument('types', '')
-        if not all([name,region,year,director,intro,types,english_name,cinemanufacturer,protagonist,cost,scriptwriter,release_date,box_office,length,tag]):
+        if not all([name,region,year,director,intro,types,english_name,
+        cinemanufacturer,protagonist,cost,scriptwriter,release_date,
+        box_office,length,tag]):
             mes['data'] = "参数不能为空,请重新输入"
             self.render('../templates/product_add.html', classify=classify,**mes)
         else:
@@ -376,6 +391,8 @@ class Product_add(BaseHandler):
                 self.render('../templates/product_add.html', classify=classify,**mes)
 
 
+
+
 # 删除视频
 class Product_del(BaseHandler):
     def get(self, id):
@@ -385,13 +402,14 @@ class Product_del(BaseHandler):
         self.redirect('/product_list')
 
 
+
+
 # #修改视频
 class Product_edit(BaseHandler):
     def get(self, id):
         classify = sess.query(Classify).all()
         video = sess.query(Video).filter_by(id=id).first()
         self.render('../templates/product_edit.html', classify=classify, video=video)
-
     def post(self, id):
         p = sess.query(Video).filter_by(id=id).first()
         name = self.get_argument('name', '')
@@ -426,6 +444,7 @@ class Product_edit(BaseHandler):
         p.types = types
         sess.commit()
         self.redirect('/product_list')
+
 
 
 
@@ -488,6 +507,8 @@ class Product_micro(BaseHandler):
         self.render('../templates/product_micro.html', micro_video=m_list, lens=lens)
 
 
+
+
 # 添加微视频
 class Product_video_add(BaseHandler):
     def get(self, *args, **kwargs):
@@ -517,10 +538,14 @@ class Product_video_add(BaseHandler):
         self.render('../templates/product_video_add.html',**mes)
 
 
+
+
 # 栏目列表
 class Product_column(BaseHandler):
     def get(self, *args, **kwargs):
         self.render('../templates/product_column.html')
+
+
 
 
 # # 添加栏目
@@ -550,6 +575,8 @@ class Product_column_add(BaseHandler):
                  self.render('../templates/Product_column_add.html',columns=columns,**mes)
 
 
+
+
 # 删除栏目
 class Column_del(BaseHandler):
     def get(self, id):
@@ -560,11 +587,14 @@ class Column_del(BaseHandler):
 
 
 
+
 # 标签列表
 class Product_label(BaseHandler):
     def get(self, *args, **kwargs):
 
         self.render('../templates/product_label.html')
+
+
 
 
 # 添加标签
@@ -595,6 +625,7 @@ class Product_label_add(BaseHandler):
 
 
 
+
 # 删除标签
 class Label_del(BaseHandler):
     def get(self, id):
@@ -605,12 +636,14 @@ class Label_del(BaseHandler):
 
 
 
+
 # 评论列表
 class Feedment_list(BaseHandler):
     def get(self, *args, **kwargs):
         comment = sess.query(Comment).all()
         lens = len(comment)
         self.render('../templates/feedment_list.html', comment=comment, lens=lens)
+
 
 
 
@@ -796,13 +829,51 @@ class IndexHandler(BaseHandler):
         self.write("Hello, world123")
         # self.finish({'name':'你好'})
 
+
+
+#微视频 上传视频
+class Upload_video(BaseHandler):
+    def get(self,id):
+        micro_video = sess.query(Micro_video).filter_by(id=id).first()
+
+        movie = sess.query(Movie).all()
+        self.render('../templates/upload_video.html', movie=movie,micro_video=micro_video)
+
+    def post(self,id):
+        ret = {'result': 'OK'}
+
+        upload_path = os.path.dirname(os.path.dirname(__file__))+"/static/files/"      #文件的暂存路径
+
+        file_metas = self.request.files.get('file', None)  # 提取表单中‘name’为‘file’的文件元数据
+        goods = self.get_argument('goods')
+
+        if not file_metas:
+            ret['result'] = 'Invalid Args'
+            return ret
+
+        for meta in file_metas:
+            filename = meta['filename']
+            file_path = os.path.join(upload_path, filename)
+
+            with open(file_path, 'wb') as up:
+                up.write(meta['body'])
+            
+            g_img = Movie(movie_name= filename,micro_video_id=goods)
+            sess.add(g_img)
+            sess.commit()
+            print(g_img)
+
+        self.redirect('/upload_video')
+
+        # self.write(json.dumps(ret, ensure_ascii=False))
+
+
+
+
 # class IndexHandler(BaseHandler):
 #     def get(self, *args, **kwargs):
 #         bill = sess.query(Bill).all()
 #         self.write(json.dumps({"status": 200, "msg": "返回成功",'billcate':bill}, cls=AlchemyEncoder, ensure_ascii=False))
-
-
-
 
 
 # class Add(BaseHandler):

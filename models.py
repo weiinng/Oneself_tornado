@@ -242,6 +242,16 @@ class Picture(Base):
     micro_video_id = Column(Integer)        #微视频id
 
 
+# 存放视频表
+class Movie(Base):
+    __tablename__ = 'movie'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    movie_name = Column(String(500))        #视频名称
+    big_v_id = Column(Integer)              #明星id
+    video_id = Column(Integer)              #视频id
+    user_id = Column(Integer)               #用户id
+    micro_video_id = Column(Integer)        #微视频id
+
 
 #系统表
 class System(Base):
