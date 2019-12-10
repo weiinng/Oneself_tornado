@@ -113,7 +113,8 @@ class Product_brand(BaseHandler):
 class Product_show(BaseHandler):
     def get(self,id):
         big_v = sess.query(Big_V).filter(Big_V.id == id ).one()
-        self.render('../templates/product_show.html',big_v=big_v)
+        picture = sess.query(Picture).filter(Picture.big_v_id == id ).one()
+        self.render('../templates/product_show.html',big_v=big_v,picture=picture)
 
 
 
@@ -338,7 +339,8 @@ class Product_list(BaseHandler):
 class Product_details(BaseHandler):
     def get(self,id):
         video = sess.query(Video).filter(Video.id == id ).one()
-        self.render('../templates/product_details.html',video=video)
+        picture = sess.query(Picture).filter(Picture.video_id == id ).one()
+        self.render('../templates/product_details.html',video=video,picture=picture)
 
 
 
@@ -835,7 +837,7 @@ class IndexHandler(BaseHandler):
 class Upload_video(BaseHandler):
     def get(self,id):
         micro_video = sess.query(Micro_video).filter_by(id=id).first()
-
+        # movie = sess.query(Movie).filter(Movie.micro_video_id == id ).one()
         movie = sess.query(Movie).all()
         self.render('../templates/upload_video.html', movie=movie,micro_video=micro_video)
 
@@ -863,7 +865,7 @@ class Upload_video(BaseHandler):
             sess.commit()
             print(g_img)
 
-        self.redirect('/upload_video')
+        self.redirect('/product_micro')
 
         # self.write(json.dumps(ret, ensure_ascii=False))
 
@@ -897,8 +899,8 @@ class Upload_movie(BaseHandler):
             sess.add(g_img)
             sess.commit()
             print(g_img)
+        self.write(json.dumps(ret))
 
-        self.redirect('/upload_movie')
 
 
 # class IndexHandler(BaseHandler):

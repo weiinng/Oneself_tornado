@@ -230,7 +230,6 @@ class Opinion(Base,IdBase):
 
 
 
-
 # 图片表
 class Picture(Base):
     __tablename__ = 'picture'

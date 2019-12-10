@@ -17,7 +17,7 @@ setting = {
 }
 
 #mysql配置
-HOSTNAME = '106.13.137.97'
+HOSTNAME = '106.13.67.197'
 PORT = '3306'
 DATABASE = 'red_db'
 USERNAME = 'root'
