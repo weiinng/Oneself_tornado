@@ -63,10 +63,9 @@ from models import *
 #     sess.add(class_id)
 # sess.commit()
 #     '''
-
 # coding: utf-8
 
 
 
 
-
+# 上传图片demo

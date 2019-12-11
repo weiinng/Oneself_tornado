@@ -123,7 +123,7 @@ class Micro_video(Base,IdBase):
     length = Column(String(100))                             #片长
     issue_time = Column(DateTime(),default=datetime.now)     #发布时间（精确到秒）
     is_show = Column(Integer,default=0)                      #发布状态
-    user_id = Column(Integer)                                #用户id
+    user_id = Column(Integer)                                #管理员id
 
 
 
