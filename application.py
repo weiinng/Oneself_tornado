@@ -81,7 +81,12 @@ class Application(tornado.web.Application):
 
 
             (r"/product_micro", Index.Product_micro),  # 微视频管理
-            (r"/product_video_add", Index.Product_video_add),  # 添加微视频 
+            (r"/product_video_add", Index.Product_video_add),  # 添加微视频信息
+            (r"/product_micro_edit/(\d+)", Index.Product_micro_edit),  # 修改微视频信息
+            (r'/product_micro_details/(\d+)', Index.Product_micro_details),       #微视频详情
+
+            (r'/upload_video/(\d+)', Index.Upload_video),       #微视频 上传视频
+
 
 
             (r"/feedment_list", Index.Feedment_list),  # 评论列表
@@ -122,7 +127,7 @@ class Application(tornado.web.Application):
 
 
 
-            (r'/upload_video/(\d+)', Index.Upload_video),       #微视频 上传视频
+
             (r'/upload_movie', Index.Upload_movie),             #视频展示
 
 

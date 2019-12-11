@@ -10,14 +10,17 @@
     <script src='/static/js/jquery.Huploadify.js'></script>
 </head>
 <body>
-
+	
 
         <label class="form-label col-xs-4 col-sm-2">选择用户</label>
             <select name="goods" id="goods">
                 
                 <option value="{{ user.id }}">{{ user.name }}</option>
                 
-            </select><br>
+			</select><br>
+			<button onClick="layer_close();" class="btn btn-default radius" type="button"><a href="/user_list">取消</a></button>
+
+			
 		
 
 		

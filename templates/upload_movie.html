@@ -12,14 +12,16 @@
         <form  enctype="multipart/form-data" method='post'>
     
         
-            <input type='file' name='file'/><br/>
+            <!-- <input type='file' name='file'/><br/>
             <input type='submit' value='上传微视频'/>
+            <button onClick="layer_close();" class="btn btn-default radius" type="button"><a href="/product_micro">取消</a></button> -->
+
             
     
             <br>
             
             {% for i in movie %}
-            <video src="../static/files/{{ i.movie_name }}" controls="controls" autoplay="autoplay" width="400" height="250" ></video>
+            <video src="../static/files/{{ i.movie_name }}" controls="controls" autoplay="autoplay" width="150" height="70" ></video>
             {% end %}
             
         

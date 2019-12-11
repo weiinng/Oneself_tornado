@@ -833,6 +833,41 @@ class IndexHandler(BaseHandler):
 
 
 
+# 修改微视频信息
+class Product_micro_edit(BaseHandler):
+    def get(self, id):
+        micro_video = sess.query(Micro_video).filter_by(id=id).first()
+        self.render('../templates/product_micro_edit.html', micro_video=micro_video)
+    def post(self, id):
+        p = sess.query(Micro_video).filter_by(id=id).first()
+        name = self.get_argument('name', '')
+        length = self.get_argument('length', '')
+        p.name = name
+        p.length = length
+        sess.commit()
+        self.redirect('/product_micro')
+
+
+
+#微视频详情
+class Product_micro_details(BaseHandler):
+    def get(self,id):
+        micro_video = sess.query(Micro_video).filter(Micro_video.id == id ).one()
+        movie = sess.query(Movie).filter(Movie.micro_video_id == id ).one()
+        self.render('../templates/Product_micro_details.html',micro_video=micro_video,movie=movie)
+
+
+
+# 删除微视频
+class Micro_del(BaseHandler):
+    def get(self, id):
+        micro_video = sess.query(Micro_video).filter(Micro_video.id == id ).one()
+        sess.delete(micro_video)
+        sess.commit()
+        self.redirect('/product_micro')
+
+
+
 #微视频 上传视频
 class Upload_video(BaseHandler):
     def get(self,id):
@@ -871,19 +906,16 @@ class Upload_video(BaseHandler):
 
 
 
+
 #上传视频
 class Upload_movie(BaseHandler):
     def get(self, *args, **kwargs):
         movie = sess.query(Movie).all()
         self.render('../templates/upload_movie.html', movie=movie)
-
     def post(self, *args, **kwargs):
         ret = {'result': 'OK'}
-
         upload_path = os.path.dirname(os.path.dirname(__file__))+"/static/files/"      #文件的暂存路径
-
         file_metas = self.request.files.get('file', None)  # 提取表单中‘name’为‘file’的文件元数据
-
         if not file_metas:
             ret['result'] = 'Invalid Args'
             return ret
@@ -921,3 +953,28 @@ class Upload_movie(BaseHandler):
 #         sess.add(bill)
 #         sess.commit()
 #         self.redirect('/')
+
+
+
+
+###################################################################
+import json
+import re
+
+class RegisterHanler(BaseHandler):
+    def get(self, *args, **kwargs):
+        self.write(json.dumps({"status":200,"msg":"返回成功"},ensure_ascii=False,indent=4))
+    async def post(self ,*args ,**kwargs):
+        phoneno = self.get_argument('phoneno')
+        password = self.get_argument('password')
+        code = self.get_argument('code')
+        if not all([phoneno,password,code]):
+            self.write(json.dumps({'status':10010,'msg':'内容输入不全'},ensure_ascii=False,index=4))
+        else:
+            if re.match('^1[3578]\d{9}$',phoneno):
+                user = sess.query(User).filter(User.phone == phoneno).first()
+                if not user:
+                    pass
+                
+
+
