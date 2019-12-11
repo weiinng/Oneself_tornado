@@ -84,6 +84,8 @@ class Application(tornado.web.Application):
             (r"/product_video_add", Index.Product_video_add),  # 添加微视频信息
             (r"/product_micro_edit/(\d+)", Index.Product_micro_edit),  # 修改微视频信息
             (r'/product_micro_details/(\d+)', Index.Product_micro_details),       #微视频详情
+            
+            (r"/upload_micro/(\d+)", Index.Upload_micro),  # 微视频图片上传
 
             (r'/upload_video/(\d+)', Index.Upload_video),       #微视频 上传视频
 

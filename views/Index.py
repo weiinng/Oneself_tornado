@@ -854,7 +854,9 @@ class Product_micro_details(BaseHandler):
     def get(self,id):
         micro_video = sess.query(Micro_video).filter(Micro_video.id == id ).one()
         movie = sess.query(Movie).filter(Movie.micro_video_id == id ).one()
-        self.render('../templates/Product_micro_details.html',micro_video=micro_video,movie=movie)
+        picture = sess.query(Picture).filter(Picture.micro_video_id == id ).one()
+
+        self.render('../templates/Product_micro_details.html',micro_video=micro_video,movie=movie,picture=picture)
 
 
 
@@ -865,6 +867,37 @@ class Micro_del(BaseHandler):
         sess.delete(micro_video)
         sess.commit()
         self.redirect('/product_micro')
+
+
+
+import os 
+#微视频上传图片
+class Upload_micro(BaseHandler):
+    async def get(self,id):
+        micro_video = sess.query(Micro_video).filter_by(id=id).first()
+        self.render('../templates/upload_micro.html', micro_video=micro_video)
+
+    async def post(self,id):
+        # 上传路径
+        upload_path = os.path.dirname(os.path.dirname(__file__))+"/static/upload/"
+        # 接收文件，以对象的形式
+        img = self.request.files.get('file', None)
+        # 获取jquery传来的值
+        goods = self.get_argument('goods')
+        # 写入本地
+        for meta in img:
+            filename = meta['filename']
+            file_path = upload_path + filename
+            with open(file_path, 'wb') as up:
+                up.write(meta['body'])
+            g_img = Picture(picture_name=filename,
+                            micro_video_id = goods
+                            )
+            sess.add(g_img)
+            sess.commit()
+            print(g_img)
+        self.write(json.dumps({'status': 'ok'}, ensure_ascii=False))
+
 
 
 
