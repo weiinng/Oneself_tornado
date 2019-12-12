@@ -65,7 +65,26 @@ from models import *
 #     '''
 # coding: utf-8
 
-
-
-
+import qiniu
+access_key = "I4CrykkGIkn6t5ebigiaWZdVURypDGgyAHBSVsvI"
+secret_key = "dmAHKa5kXI4Z6XyqiIPQJAuu3zrDHkmXJMrKgden"
+bucket_name = "redinnovation"
+url = 'redinnovation.s3-cn-north-1.qiniucs.com'
+q = qiniu.Auth(access_key, secret_key)
 # 上传图片demo
+
+def qiniu_upload(key, localfile):
+    token = q.upload_token(bucket_name, key, 3600)
+    ret, info = qiniu.put_file(token, key, localfile)
+    if ret:
+        return '{0}{1}'.format(url, ret['key'])
+    else:
+        raise print('上传失败请重试！')
+key = '微信图片_20180408124226.jpg'
+localfile = "static/imgs/123321.png"
+res = qiniu_upload(key,localfile)
+img_url = "http://q2cbcbetl.bkt.clouddn.com/"+key
+
+
+
+
