@@ -50,13 +50,31 @@
 
 
         <div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"> 导演：</label>
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span> 导演：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" name="director" id="director" placeholder="" value="" class="input-text">
 			</div>
+        </div>
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>主演：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="protagonist" id="protagonist" placeholder="" value="" class="input-text">
+			</div>
+        </div>
+		
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>影片地区：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="region" id="region" placeholder="" value="" class="input-text">
+			</div>
 		</div>
-		
-		
+
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>票房：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="box_office" id="box_office" placeholder="" value="" class="input-text">
+			</div>
+        </div>
 
         <div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">制片人：</label>
@@ -65,12 +83,7 @@
 			</div>
         </div>
         
-        <div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">主演：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" name="protagonist" id="protagonist" placeholder="" value="" class="input-text">
-			</div>
-        </div>
+
             
 
         <div class="row cl">
@@ -82,12 +95,7 @@
         
         
         
-        <div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">票房：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" name="box_office" id="box_office" placeholder="" value="" class="input-text">
-			</div>
-        </div>
+
         
         <div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">片长：</label>
@@ -104,7 +112,7 @@
         </div>
 
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>分类栏目：</label>
+            <label class="form-label col-xs-4 col-sm-2">分类栏目：</label>
 			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
 				<select name="types" class="select" >
                         {% for i in classify %}
@@ -116,26 +124,21 @@
 		</div>
 
         <div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">制片成本：</label>
+			<label class="form-label col-xs-4 col-sm-2"> 制片成本：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" name="cost" id="cost" placeholder="" value="" class="input-text">
 			</div>
         </div>
 
         <div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">上映时间：</label>
+			<label class="form-label col-xs-4 col-sm-2"> 上映时间：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" name="release_date" id="release_date" placeholder="" value="" class="input-text">
 			</div>
         </div>
 
 
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">影片地区：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" name="region" id="region" placeholder="" value="" class="input-text">
-			</div>
-		</div>
+
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">制片年份：</label>
 			<div class="formControls col-xs-8 col-sm-9">

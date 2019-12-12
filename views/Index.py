@@ -143,10 +143,9 @@ class Product_brand_add(BaseHandler):
         profession = self.get_argument('profession', '')
         nationality = self.get_argument('nationality', '')
         director = self.get_argument('director', '')
-        if not all([name,year,english_name,nation,graduate_academy,blood_type,
-        stature,weight,constellation,main_achievements,in_work,region,gender,nationality,
-        profession,director]):
-            mes['data'] = '参数不能为空，请重新输入'
+        if not all([name,year,region,gender,nationality,
+        profession,director,nation]):
+            mes['data'] = '*号参数不能为空，请重新输入'
             self.render('../templates/product_brand_add.html',**mes)
         else:
             try:
@@ -369,9 +368,7 @@ class Product_add(BaseHandler):
         length = self.get_argument('length', '')
         tag = self.get_argument('tag', '')
         types = self.get_argument('types', '')
-        if not all([name,region,year,director,intro,types,english_name,
-        cinemanufacturer,protagonist,cost,scriptwriter,release_date,
-        box_office,length,tag]):
+        if not all([name,region,director,protagonist,scriptwriter,box_office]):
             mes['data'] = "参数不能为空,请重新输入"
             self.render('../templates/product_add.html', classify=classify,**mes)
         else:

@@ -16,23 +16,23 @@ options_img={
 
 #配置
 setting = {
-    'static_path':os.path.join(BASE_DIRS,'static'),
-    'template_path':os.path.join(BASE_DIRS,'templates'),
+    'static_path':os.path.join(BASE_DIRS,'static'),         # 静态资源
+    'template_path':os.path.join(BASE_DIRS,'templates'),    # html页面
     'debug':True,
     # 'autoreload':True
 }
 
 #mysql配置
-HOSTNAME = '106.13.67.197'
-PORT = '3306'
-DATABASE = 'red_db'
-USERNAME = 'root'
-PASSWORD = '123456'
+HOSTNAME = '106.13.67.197'   #ip地址
+PORT = '3306'                #端口
+DATABASE = 'red_db'          #数据库名
+USERNAME = 'root'            #账号
+PASSWORD = '123456'          #密码
 
 
 #redis配置
-REDIS_HOST = '127.0.0.1'
-REDIS_POST = 6379
+REDIS_HOST = '127.0.0.1'    #本地展示地址
+REDIS_POST = 6379           
 
 
 #七牛云配置
