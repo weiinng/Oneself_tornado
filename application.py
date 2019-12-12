@@ -123,7 +123,7 @@ class Application(tornado.web.Application):
 
 
 
-            (r'/upload_movie', Index.Upload_movie),             #视频展示
+            (r'/movie_list', Index.Movie_list),             #视频展示
 
 
         ]

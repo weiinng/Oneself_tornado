@@ -3,11 +3,28 @@ from models import *
 import json
 from qiniu_stk.qiniuupload_img import qiniu_upload
 
-
-
-
-
 # 后台首页
+
+
+#登录
+class Login(BaseHandler):
+    def get(self,*args,**kwargs):
+        self.render('../templates/login.html')
+    def post(self,*args,**kwargs):
+        account = self.get_argument('account','')
+        password = self.get_argument('password','')
+
+        admin = sess.query(AdminUser).filter(AdminUser.account==account).first()
+        if admin:
+            if admin.password == password:
+                self.redirect('/')
+            else:
+                self.write('密码错误')
+        else:
+            self.write('账号不存在')
+
+
+
 # 首页
 class Index(BaseHandler):
     def get(self, *args, **kwargs):
@@ -878,8 +895,6 @@ class Micro_del(BaseHandler):
 
 
 
-
-
 import os 
 #微视频上传图片
 class Upload_micro(BaseHandler):
@@ -906,7 +921,7 @@ class Upload_micro(BaseHandler):
 
                 qiniu_upload(filename, file_path)
 
-                g_img = Picture(picture_name=filename,
+                g_img = Picture(picture_name= "http://q2cbcbetl.bkt.clouddn.com/"+filename,
                                 micro_video_id = goods
                                 )
                 sess.add(g_img)
@@ -957,11 +972,11 @@ class Upload_video(BaseHandler):
 
 
 
-#视频列表
-class Upload_movie(BaseHandler):
+# 视频列表
+class Movie_list(BaseHandler):
     def get(self, *args, **kwargs):
         movie = sess.query(Movie).all()
-        self.render('../templates/upload_movie.html', movie=movie)
+        self.render('../templates/movie_list.html', movie=movie)
 
 
 
