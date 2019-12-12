@@ -10,10 +10,6 @@ class Application(tornado.web.Application):
 
             (r"/ceshi", AppPort.Ceshi),
 
-
-
-
-
             #主页面操作
             (r"/index", Index.IndexHandler),
             (r"/", Index.Index),  # 首页
@@ -84,17 +80,14 @@ class Application(tornado.web.Application):
             (r"/product_video_add", Index.Product_video_add),  # 添加微视频信息
             (r"/product_micro_edit/(\d+)", Index.Product_micro_edit),  # 修改微视频信息
             (r'/product_micro_details/(\d+)', Index.Product_micro_details),       #微视频详情
-            
             (r"/upload_micro/(\d+)", Index.Upload_micro),  # 微视频图片上传
-
             (r'/upload_video/(\d+)', Index.Upload_video),       #微视频 上传视频
 
 
 
-            (r"/feedment_list", Index.Feedment_list),  # 评论列表
-            (r"/feedment_del/(\d+)", Index.Feedment_del),  # 删除评论
-
-            (r"/feedback_list", Index.Feedback_list),  # 意见反馈
+            (r"/feedment_list", Index.Feedment_list),           # 评论列表
+            (r"/feedment_del/(\d+)", Index.Feedment_del),       # 删除评论
+            (r"/feedback_list", Index.Feedback_list),           # 意见反馈
 
 
             (r"/member_level", Index.Member_level),  # 等级管理
@@ -115,17 +108,17 @@ class Application(tornado.web.Application):
 
 
 
-            (r"/system_base", Index.System_base),  # 系统设置
-            (r"/system_category", Index.System_category),  # 栏目管理
-            (r"/system_data", Index.System_data),  # 数据字典
-            (r"/system_shielding", Index.System_shielding),  # 屏蔽词
-            (r"/system_log", Index.System_log),  # 系统日志
+            (r"/system_base", Index.System_base),                    # 系统设置
+            (r"/system_category", Index.System_category),            # 栏目管理
+            (r"/system_data", Index.System_data),                    # 数据字典
+            (r"/system_shielding", Index.System_shielding),          # 屏蔽词
+            (r"/system_log", Index.System_log),                      # 系统日志
 
 
 
-            (r"/article_add", Index.Article_add),  # 添加资讯
-            (r"/picture_add", Index.Picture_add),  # 添加图片
-            (r"/product_add", Index.Product_add),  # 添加产品
+            (r"/article_add", Index.Article_add),        # 添加资讯
+            (r"/picture_add", Index.Picture_add),        # 添加图片
+            (r"/product_add", Index.Product_add),        # 添加产品
 
 
 

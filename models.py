@@ -41,7 +41,7 @@ class User(Base,IdBase):
     email = Column(String(60),default="")                   #邮箱
     age = Column(Integer,default=0)                         #年龄  0为保密  大于则显示
     gender  = Column(Integer,default=0)                     #性别  0为保密 1为男  2为女
-    head_img = Column(String(255),default="")               #用户头像
+    # head_img = Column(String(255),default="")               #用户头像
     birthplace = Column(String(100),default="")             #地址
     is_member = Column(Integer,default=0)                   #是否会员(会员等级1~9)
     is_activate = Column(Integer,default=0)                 #是否激活
@@ -71,8 +71,8 @@ class Video(Base,IdBase):
     path = Column(String(100))                   #播放路径  （必填）
     amount = Column(Integer,default=0)           #播放次数
     hot = Column(Integer)                        #热度值
-    img1 = Column(String(255))                   #视频的一张缩略图        （必填）
-    img2 = Column(String(255))                   #视频的轮播图 可以没有
+    # img1 = Column(String(255))                   #视频的一张缩略图        （必填）
+    # img2 = Column(String(255))                   #视频的轮播图 可以没有
     thiscat_id = Column(Integer)                 #视频所属的栏目   （必填）
     video_weight = Column(Integer,default=40)    #视频权重（0~99）越小越靠前默认为40
     video_source = Column(Integer)               #这个会获取到管理员的id，超级管理员可以直接指定
@@ -88,16 +88,16 @@ class Classify(Base,IdBase):
     __tablename__ = "classify"
     name = Column(String(60))               # 分类名
     video_id = Column(Integer)              # 视频id
-    micro_video_id = Column(Integer)        # 微视频id
+    # micro_video_id = Column(Integer)        # 微视频id
 
 
 
 
-#分类and视频
-class ClassAndvideo(Base,IdBase):
-    __tablename__ = "classandvideo"
-    class_id = Column(Integer)
-    video_id = Column(Integer,nullable=False)
+# #分类and视频
+# class ClassAndvideo(Base,IdBase):
+#     __tablename__ = "classandvideo"
+#     class_id = Column(Integer)
+#     video_id = Column(Integer,nullable=False)
 
 
 
@@ -122,8 +122,9 @@ class Micro_video(Base,IdBase):
     name = Column(String(100))                               #微视频内容标题(必填)
     length = Column(String(100))                             #片长
     issue_time = Column(DateTime(),default=datetime.now)     #发布时间（精确到秒）
+    amount = Column(Integer,default=0)                       #播放次数
     is_show = Column(Integer,default=0)                      #发布状态
-    user_id = Column(Integer)                                #用户id
+    creation_id = Column(Integer)                            #栏目id
 
 
 
@@ -147,23 +148,23 @@ class Big_V(Base,IdBase):
     constellation = Column(String(255))         #星座
     main_achievements = Column(String(255))     #主要成就
     in_work = Column(String(500))               #代表作品
-    img = Column(String(500))                   #照片
+    # img = Column(String(500))                   #照片
 
 
 
 
-#大V 身份表
-class Identity(Base,IdBase):
-    __tablename__ = "identity"
-    name = Column(String(60))         #身份名称
+# #大V 身份表
+# class Identity(Base,IdBase):
+#     __tablename__ = "identity"
+#     name = Column(String(60))         #身份名称
 
 
 
-#大V and 身份
-class V_and_identity(Base,IdBase):
-    __tablename__ = "v_and_identity"     
-    v_id = Column(Integer)           
-    identity_id = Column(Integer)
+# #大V and 身份
+# class V_and_identity(Base,IdBase):
+#     __tablename__ = "v_and_identity"     
+#     v_id = Column(Integer)           
+#     identity_id = Column(Integer)
 
 
 

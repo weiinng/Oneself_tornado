@@ -744,39 +744,11 @@ class Charts_7(BaseHandler):
 
 
 
-# # 系统设置（添加）
-# class System_base(BaseHandler):
-#     def get(self, *args, **kwargs):
-#         self.render('../templates/system_base.html')
-#     def post(self, *srgs, **kwsrgs):
-#         site_name = self.get_argument('site_name', '')
-#         domain_name = self.get_argument('domain_name', '')
-#         describe = self.get_argument('describe', '')
-#         copyrights = self.get_argument('copyrights', '')
-#         number = self.get_argument('number', '')
-#         SMTP_server = self.get_argument('SMTP_server', '')
-#         SMTP_port = self.get_argument('SMTP_port', '')
-#         mail_account = self.get_argument('mail_account', '')
-#         email_password = self.get_argument('email_password', '')
-#         email_address = self.get_argument('email_address', '')
-#         system = System(site_name=site_name,domain_name=domain_name,describe=describe,
-#                 number=number,copyrights=copyrights,SMTP_server=SMTP_server,SMTP_port=SMTP_port,
-#                 mail_account=mail_account,email_password=email_password,email_address=email_address
-#                 )
-#         sess.add(system)
-#         sess.commit()
-#         self.redirect('/system_base')
-
-
-
-
-# 系统设置（修改）
+# 系统设置（添加）
 class System_base(BaseHandler):
     def get(self, *args, **kwargs):
-        system = sess.query(System).filter_by(id=1).first()
-        self.render('../templates/system_base.html',system=system)
-    def post(self, *args, **kwargs):
-        p = sess.query(System).filter_by(id=1).first()
+        self.render('../templates/system_add.html')
+    def post(self, *srgs, **kwsrgs):
         site_name = self.get_argument('site_name', '')
         domain_name = self.get_argument('domain_name', '')
         describe = self.get_argument('describe', '')
@@ -787,18 +759,46 @@ class System_base(BaseHandler):
         mail_account = self.get_argument('mail_account', '')
         email_password = self.get_argument('email_password', '')
         email_address = self.get_argument('email_address', '')
-        p.site_name = site_name
-        p.domain_name = domain_name
-        p.describe = describe
-        p.copyrights = copyrights
-        p.SMTP_server = SMTP_server
-        p.SMTP_port = SMTP_port
-        p.email_password = email_password
-        p.email_address = email_address
-        p.number = number
-        p.mail_account = mail_account
+        system = System(site_name=site_name,domain_name=domain_name,describe=describe,
+                number=number,copyrights=copyrights,SMTP_server=SMTP_server,SMTP_port=SMTP_port,
+                mail_account=mail_account,email_password=email_password,email_address=email_address
+                )
+        sess.add(system)
         sess.commit()
         self.redirect('/system_base')
+
+
+
+
+# # 系统设置（修改）
+# class System_base(BaseHandler):
+#     def get(self, *args, **kwargs):
+#         system = sess.query(System).filter_by(id=1).first()
+#         self.render('../templates/system_base.html',system=system)
+#     def post(self, *args, **kwargs):
+#         p = sess.query(System).filter_by(id=1).first()
+#         site_name = self.get_argument('site_name', '')
+#         domain_name = self.get_argument('domain_name', '')
+#         describe = self.get_argument('describe', '')
+#         copyrights = self.get_argument('copyrights', '')
+#         number = self.get_argument('number', '')
+#         SMTP_server = self.get_argument('SMTP_server', '')
+#         SMTP_port = self.get_argument('SMTP_port', '')
+#         mail_account = self.get_argument('mail_account', '')
+#         email_password = self.get_argument('email_password', '')
+#         email_address = self.get_argument('email_address', '')
+#         p.site_name = site_name
+#         p.domain_name = domain_name
+#         p.describe = describe
+#         p.copyrights = copyrights
+#         p.SMTP_server = SMTP_server
+#         p.SMTP_port = SMTP_port
+#         p.email_password = email_password
+#         p.email_address = email_address
+#         p.number = number
+#         p.mail_account = mail_account
+#         sess.commit()
+#         self.redirect('/system_base')
 
 
 
@@ -995,7 +995,7 @@ import json
 import re
 
 class RegisterHanler(BaseHandler):
-    def get(self, *args, **kwargs):
+    async def get(self, *args, **kwargs):
         self.write(json.dumps({"status":200,"msg":"返回成功"},ensure_ascii=False,indent=4))
     async def post(self ,*args ,**kwargs):
         phoneno = self.get_argument('phoneno')
@@ -1007,7 +1007,44 @@ class RegisterHanler(BaseHandler):
             if re.match('^1[3578]\d{9}$',phoneno):
                 user = sess.query(User).filter(User.phone == phoneno).first()
                 if not user:
-                    pass
-                
+                    user = User(phone=phoneno,password=password)
+                    sess.add(user)
+                    sess.commit()
+                    self.write(json.dumps({'status':200,'msg':'注册成功'},ensure_ascii=False,indent=4))
+                else:
+                    self.write(json.dumps({'status':10011,'msg':'手机号已注册'},ensure_ascii=False,indent=4))
+            else:
+                self.write(json.dumps({'status':10012,'msg':'手机号格式不正确'},ensure_ascii=False,indent=4))
+
+
+
+
+class LoginHanler(BaseHandler):
+    async def get(self, *args, **kwargs):
+        self.write(json.dumps({'status':200,'msg':'返回成功'},ensure_ascii=False,indent=4))
+    async def post(self, *args, **kwargs):
+        phoneno = self.get_argument('phoneno')
+        password = self.get_argument('password')
+        if not all([phoneno,password]):
+            self.write(json.dumps({'status':10010,'msg':'内容输入不全'},ensure_ascii=False,indent=4))
+        else:
+            user = sess.query(User).filter(User.phone==phoneno).first()
+            if user:
+                if user.password == password:
+                    self.write(json.dumps({'status':200,'msg':'登录成功'},ensure_ascii=False,indent=4))
+                else:
+                    self.write(json.dumps({'status':10010,'msg':'密码错误，请重新输入'},ensure_ascii=False,indent=4))
+            else:
+                self.write(json.dumps({'status':10011,'msg':'用户名不存在，请注册'},ensure_ascii=False,indent=4))
+
+            
+
+     
+
+class IndexHanler(BaseHandler):
+    async def get(self, *args, **kwargs):
+        self.write(json.dumps({'status':200,'msg':'返回成功'},ensure_ascii=False,indent=4))
+    async def post(self, *args, **kwargs):
+        pass
 
 

@@ -2,6 +2,7 @@ from .base import BaseHandler
 from models import *
 import json
 
+
 #用户列表
 class User_list(BaseHandler):
     def get(self,*args,**kwargs):
