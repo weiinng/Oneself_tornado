@@ -1,6 +1,8 @@
 from .base import BaseHandler
 from models import *
 import json
+from qiniu_stk.qiniuupload_img import qiniu_upload
+
 
 
 
@@ -143,9 +145,10 @@ class Product_brand_add(BaseHandler):
         profession = self.get_argument('profession', '')
         nationality = self.get_argument('nationality', '')
         director = self.get_argument('director', '')
-        if not all([name,year,region,gender,nationality,
-        profession,director,nation]):
-            mes['data'] = '*号参数不能为空，请重新输入'
+        if not all([name,year,english_name,nation,graduate_academy,blood_type,
+        stature,weight,constellation,main_achievements,in_work,region,gender,
+        profession,nationality,director]):
+            mes['data'] = '参数不能为空，请重新输入'
             self.render('../templates/product_brand_add.html',**mes)
         else:
             try:
@@ -219,12 +222,15 @@ class Upload_brand(BaseHandler):
             file_path = upload_path + filename
             with open(file_path, 'wb') as up:
                 up.write(meta['body'])
-            g_img = Picture(picture_name=filename,
-                            big_v_id = goods
-                            )
-            sess.add(g_img)
-            sess.commit()
-            print(g_img)
+
+                qiniu_upload(filename, file_path)
+
+                g_img = Picture(picture_name=filename,
+                                big_v_id = goods
+                                )
+                sess.add(g_img)
+                sess.commit()
+                print(g_img)
         self.write(json.dumps({'status': 'ok'}, ensure_ascii=False))
 
 
@@ -368,7 +374,9 @@ class Product_add(BaseHandler):
         length = self.get_argument('length', '')
         tag = self.get_argument('tag', '')
         types = self.get_argument('types', '')
-        if not all([name,region,director,protagonist,scriptwriter,box_office]):
+        if not all([name,region,year,director,intro,english_name,
+        cinemanufacturer,protagonist,cost,scriptwriter,release_date,
+        box_office,length,tag,types]):
             mes['data'] = "参数不能为空,请重新输入"
             self.render('../templates/product_add.html', classify=classify,**mes)
         else:
@@ -466,11 +474,14 @@ class Upload_product(BaseHandler):
             file_path = upload_path + filename
             with open(file_path, 'wb') as up:
                 up.write(meta['body'])
-            g_img = Picture(picture_name=filename,
-                            video_id = goods
-                            )
-            sess.add(g_img)
-            sess.commit()
+                
+                qiniu_upload(filename, file_path)
+
+                g_img = Picture(picture_name=filename,
+                                video_id = goods
+                                )
+                sess.add(g_img)
+                sess.commit()
         self.write(json.dumps({'status': 'ok'}, ensure_ascii=False))
 
 
@@ -866,6 +877,9 @@ class Micro_del(BaseHandler):
 
 
 
+
+
+
 import os 
 #微视频上传图片
 class Upload_micro(BaseHandler):
@@ -880,18 +894,25 @@ class Upload_micro(BaseHandler):
         img = self.request.files.get('file', None)
         # 获取jquery传来的值
         goods = self.get_argument('goods')
+         
         # 写入本地
         for meta in img:
             filename = meta['filename']
             file_path = upload_path + filename
+            print(filename)
+            print(file_path)
             with open(file_path, 'wb') as up:
                 up.write(meta['body'])
-            g_img = Picture(picture_name=filename,
-                            micro_video_id = goods
-                            )
-            sess.add(g_img)
-            sess.commit()
-            print(g_img)
+
+                qiniu_upload(filename, file_path)
+
+                g_img = Picture(picture_name=filename,
+                                micro_video_id = goods
+                                )
+                sess.add(g_img)
+                sess.commit()
+                print(g_img)
+
         self.write(json.dumps({'status': 'ok'}, ensure_ascii=False))
 
 
@@ -923,44 +944,24 @@ class Upload_video(BaseHandler):
 
             with open(file_path, 'wb') as up:
                 up.write(meta['body'])
-            
-            g_img = Movie(movie_name= filename,micro_video_id=goods)
-            sess.add(g_img)
-            sess.commit()
-            print(g_img)
+                
+                qiniu_upload(filename, file_path)
+                g_img = Movie(movie_name= filename,micro_video_id=goods)
+                sess.add(g_img)
+                sess.commit()
+                print(g_img)
 
-        self.redirect('/product_micro')
-
-        # self.write(json.dumps(ret, ensure_ascii=False))
-
+                self.redirect('/product_micro')
 
 
 
-#上传视频
+
+
+#视频列表
 class Upload_movie(BaseHandler):
     def get(self, *args, **kwargs):
         movie = sess.query(Movie).all()
         self.render('../templates/upload_movie.html', movie=movie)
-    def post(self, *args, **kwargs):
-        ret = {'result': 'OK'}
-        upload_path = os.path.dirname(os.path.dirname(__file__))+"/static/files/"      #文件的暂存路径
-        file_metas = self.request.files.get('file', None)  # 提取表单中‘name’为‘file’的文件元数据
-        if not file_metas:
-            ret['result'] = 'Invalid Args'
-            return ret
-
-        for meta in file_metas:
-            filename = meta['filename']
-            file_path = os.path.join(upload_path, filename)
-
-            with open(file_path, 'wb') as up:
-                up.write(meta['body'])
-            
-            g_img = Movie(movie_name= filename)
-            sess.add(g_img)
-            sess.commit()
-            print(g_img)
-        self.write(json.dumps(ret))
 
 
 

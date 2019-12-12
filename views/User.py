@@ -1,6 +1,8 @@
 from .base import BaseHandler
 from models import *
 import json
+from qiniu_stk.qiniuupload_img import qiniu_upload
+
 
 
 #用户列表
@@ -142,11 +144,14 @@ class Upload_user(BaseHandler):
             file_path = upload_path + filename
             with open(file_path, 'wb') as up:
                 up.write(meta['body'])
-            g_img = Picture(picture_name=filename,
-                            user_id = goods
-                            )
-            sess.add(g_img)
-            sess.commit()
+
+                qiniu_upload(filename, file_path)
+
+                g_img = Picture(picture_name=filename,
+                                user_id = goods
+                                )
+                sess.add(g_img)
+                sess.commit()
         self.write(json.dumps({'status': 'ok'}, ensure_ascii=False))
 
 
@@ -189,7 +194,8 @@ class Member_user_del(BaseHandler):
 class Member_show(BaseHandler):
     def get(self,id):
         user = sess.query(User).filter(User.id == id ).one()
-        self.render('../templates/member_show.html',user=user)
+        picture = sess.query(Picture).filter(Picture.user_id == id ).one()
+        self.render('../templates/member_show.html',user=user,picture=picture)
 
 
         
