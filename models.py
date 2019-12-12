@@ -124,7 +124,11 @@ class Micro_video(Base,IdBase):
     issue_time = Column(DateTime(),default=datetime.now)     #发布时间（精确到秒）
     amount = Column(Integer,default=0)                       #播放次数
     is_show = Column(Integer,default=0)                      #发布状态
+<<<<<<< HEAD
     creation_id = Column(Integer)                            #栏目id
+=======
+    user_id = Column(Integer)                                #管理员id
+>>>>>>> d90b5a62c66adbc0680056265340dfbe714519c9
 
 
 
