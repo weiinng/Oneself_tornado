@@ -41,7 +41,7 @@ class User(Base,IdBase):
     email = Column(String(60),default="")                   #邮箱
     age = Column(Integer,default=0)                         #年龄  0为保密  大于则显示
     gender  = Column(Integer,default=0)                     #性别  0为保密 1为男  2为女
-    # head_img = Column(String(255),default="")               #用户头像
+    # head_img = Column(String(255),default="")             #用户头像
     birthplace = Column(String(100),default="")             #地址
     is_member = Column(Integer,default=0)                   #是否会员(会员等级1~9)
     is_activate = Column(Integer,default=0)                 #是否激活
@@ -124,11 +124,8 @@ class Micro_video(Base,IdBase):
     issue_time = Column(DateTime(),default=datetime.now)     #发布时间（精确到秒）
     amount = Column(Integer,default=0)                       #播放次数
     is_show = Column(Integer,default=0)                      #发布状态
-<<<<<<< HEAD
     creation_id = Column(Integer)                            #栏目id
-=======
     user_id = Column(Integer)                                #管理员id
->>>>>>> d90b5a62c66adbc0680056265340dfbe714519c9
 
 
 

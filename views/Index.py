@@ -201,13 +201,12 @@ class Product_brand_edit(BaseHandler):
 
 
 
-import os 
+import os
 #明星上传图片
 class Upload_brand(BaseHandler):
     async def get(self,id):
         big_v = sess.query(Big_V).filter_by(id=id).first()
         self.render('../templates/upload_brand.html', big_v=big_v)
-
     async def post(self,id):
         # 上传路径
         upload_path = os.path.dirname(os.path.dirname(__file__))+"/static/upload/"

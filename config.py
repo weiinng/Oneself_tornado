@@ -37,8 +37,8 @@ REDIS_POST = 6379
 
 #七牛云配置
 qiniu_page = {
-    "access_key":"I4CrykkGIkn6t5ebigiaWZdVURypDGgyAHBSVsvI",
-    "secret_key":"dmAHKa5kXI4Z6XyqiIPQJAuu3zrDHkmXJMrKgden",
-    "bucket_name":"redinnovation",
-    "url":'redinnovation.s3-cn-north-1.qiniucs.com',
+    "access_key":"I4CrykkGIkn6t5ebigiaWZdVURypDGgyAHBSVsvI",     # 您的七牛密匙access_key
+    "secret_key":"dmAHKa5kXI4Z6XyqiIPQJAuu3zrDHkmXJMrKgden",     # 您的七牛密匙secret_key
+    "bucket_name":"redinnovation",                               # 您的七牛空间名
+    "url":'redinnovation.s3-cn-north-1.qiniucs.com',             # 临时域名
 }
