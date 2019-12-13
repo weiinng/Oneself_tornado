@@ -77,7 +77,6 @@ class Video(Base,IdBase):
     intro = Column(Text)                         #电影简介 （必填）
     year = Column(String(100))                   #制片年份 （必填）
     region = Column(String(100))                 #影片地区 （必填）
-    length = Column(String(100))                 #片长  
     types = Column(Integer)                      #类型 
     tag = Column(String(100))                    #影片标签
     resolution = Column(String(100))             #分辨率

@@ -1,7 +1,7 @@
 from .base import BaseHandler
 from models import *
 import json
-from qiniu_stk.qiniuupload_img import qiniu_upload
+from qiniu_stk.qiniuupload_img import qiniu_upload,gitVideoTime
 
 # 后台首页
 
@@ -388,12 +388,11 @@ class Product_add(BaseHandler):
         scriptwriter = self.get_argument('scriptwriter', '')
         release_date = self.get_argument('release_date', '')
         box_office = self.get_argument('box_office', '')
-        length = self.get_argument('length', '')
         tag = self.get_argument('tag', '')
         types = self.get_argument('types', '')
         if not all([name,region,year,director,intro,english_name,
         cinemanufacturer,protagonist,cost,scriptwriter,release_date,
-        box_office,length,tag,types]):
+        box_office,tag,types]):
             mes['data'] = "参数不能为空,请重新输入"
             self.render('../templates/product_add.html', classify=classify,**mes)
         else:
@@ -404,8 +403,7 @@ class Product_add(BaseHandler):
                     name=name,region=region, year=year,director=director,types=types,
                     intro=intro,english_name=english_name,cinemanufacturer=cinemanufacturer,
                     protagonist=protagonist,cost=cost,scriptwriter=scriptwriter,
-                    release_date=release_date,box_office=box_office,length=length,
-                    tag=tag)
+                    release_date=release_date,box_office=box_office,tag=tag)
                 sess.add(movie)
                 sess.commit()
                 self.redirect('/product_list')
@@ -447,7 +445,6 @@ class Product_edit(BaseHandler):
         scriptwriter = self.get_argument('scriptwriter', '')
         release_date = self.get_argument('release_date', '')
         box_office = self.get_argument('box_office', '')
-        length = self.get_argument('length', '')
         tag = self.get_argument('tag', '')
         types = self.get_argument('types', '')
         p.name = name
@@ -462,7 +459,6 @@ class Product_edit(BaseHandler):
         p.scriptwriter = scriptwriter
         p.release_date = release_date
         p.box_office = box_office
-        p.length = length
         p.tag = tag
         p.types = types
         sess.commit()
@@ -953,6 +949,7 @@ class Upload_video(BaseHandler):
             with open(file_path, 'wb') as up:
                 up.write(meta['body'])
             qiniu_upload(filename,file_path)
+
             
             print(filename)
             g_img = Movie(movie_name="http://q2cbcbetl.bkt.clouddn.com/"+filename,
