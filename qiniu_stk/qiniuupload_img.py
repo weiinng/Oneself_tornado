@@ -42,9 +42,9 @@ def setUrlUp(imgName,imgPage):
 # pip install moviepy /可以传网络资源
 
 #长代码连接 https://blog.csdn.net/longjuanfengzc/article/details/103006691
-from moviepy.editor import VideoFileClip
-
-clip = VideoFileClip("https://video.pearvideo.com/mp4/adshort/20191209/cont-1630783-14678805_adpkg-ad_hd.mp4")
+# from moviepy.editor import VideoFileClip
+# 
+# clip = VideoFileClip("https://video.pearvideo.com/mp4/adshort/20191209/cont-1630783-14678805_adpkg-ad_hd.mp4")
 # print(clip.duration)
 
 

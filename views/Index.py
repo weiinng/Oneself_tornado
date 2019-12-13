@@ -242,7 +242,7 @@ class Upload_brand(BaseHandler):
 
                 qiniu_upload(filename, file_path)
 
-                g_img = Picture(picture_name=filename,
+                g_img = Picture(picture_name="http://q2cbcbetl.bkt.clouddn.com/"+filename,
                                 big_v_id = goods
                                 )
                 sess.add(g_img)
@@ -494,7 +494,7 @@ class Upload_product(BaseHandler):
                 
                 qiniu_upload(filename, file_path)
 
-                g_img = Picture(picture_name=filename,
+                g_img = Picture(picture_name="http://q2cbcbetl.bkt.clouddn.com/"+filename,
                                 video_id = goods
                                 )
                 sess.add(g_img)
@@ -937,9 +937,7 @@ class Upload_micro(BaseHandler):
 class Upload_video(BaseHandler):
     def get(self,id):
         micro_video = sess.query(Micro_video).filter_by(id=id).first()
-        # movie = sess.query(Movie).filter(Movie.micro_video_id == id ).one()
-        movie = sess.query(Movie).all()
-        self.render('../templates/upload_video.html', movie=movie,micro_video=micro_video)
+        self.render('../templates/upload_video.html',micro_video=micro_video)
 
     def post(self,id):
         ret = {'result': 'OK'}
@@ -961,7 +959,8 @@ class Upload_video(BaseHandler):
                 up.write(meta['body'])
             qiniu_upload(filename,file_path)
             print(filename)
-            g_img = Movie(movie_name=filename,micro_video_id=goods)
+            g_img = Movie(movie_name="http://q2cbcbetl.bkt.clouddn.com/"+filename,
+            micro_video_id=goods)
             sess.add(g_img)
             sess.commit()
             print(g_img)
@@ -998,7 +997,55 @@ class Movie_list(BaseHandler):
 #         sess.add(bill)
 #         sess.commit()
 #         self.redirect('/')
+ 
 
+import os 
+#微视频上传图片
+class Upload(BaseHandler):
+    async def get(self):
+        self.render('../templates/zaqxsw.html')
+
+    async def post(self):
+
+        # 接收文件，以对象的形式
+        img = self.request.files.get('file', None)
+        # 获取jquery传来的值
+        print(img)
+
+        # 写入本地
+        for meta in img:
+            filename = meta['filename']
+
+            file_path = 'http://q2cbcbetl.bkt.clouddn.com/'+filename
+
+            print(filename)
+            print(file_path)
+            
+            qiniu_upload(filename, file_path)
+
+
+            # with open(file_path, 'wb') as up:
+            #     up.write(meta['body'])
+
+
+            g_img = Picture(picture_name= "http://q2cbcbetl.bkt.clouddn.com/"+filename
+                            )
+            sess.add(g_img)
+            sess.commit()
+            print(g_img)
+            # with open(file_path, 'wb') as up:
+            #     up.write(meta['body'])
+
+                # qiniu_upload(filename, file_path)
+
+                # g_img = Picture(picture_name= "http://q2cbcbetl.bkt.clouddn.com/"+filename,
+                #                 micro_video_id = goods
+                #                 )
+                # sess.add(g_img)
+                # sess.commit()
+                # print(g_img)
+
+        self.write(json.dumps({'status': 'ok'}, ensure_ascii=False))
 
 
 

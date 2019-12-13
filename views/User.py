@@ -147,7 +147,7 @@ class Upload_user(BaseHandler):
 
                 qiniu_upload(filename, file_path)
 
-                g_img = Picture(picture_name=filename,
+                g_img = Picture(picture_name="http://q2cbcbetl.bkt.clouddn.com/"+filename,
                                 user_id = goods
                                 )
                 sess.add(g_img)

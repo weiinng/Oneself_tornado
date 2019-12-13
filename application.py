@@ -122,9 +122,9 @@ class Application(tornado.web.Application):
             (r"/product_add", Index.Product_add),        # 添加产品
 
 
-
-
             (r'/movie_list', Index.Movie_list),             #视频展示
+            (r"/upload", Index.Upload),        # 添加产品
+
 
 
         ]

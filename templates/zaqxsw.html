@@ -11,21 +11,21 @@
 </head>
 <body>
 
+        <!-- <input type="text" value="100" id="t1"><br> -->
+       <!-- <input type="text" placeholder="图片名称" name="name"><br> -->
 
-        <label class="form-label col-xs-4 col-sm-2">选择明星</label>
-            <select name="goods" id="goods">
-            
-                <option value="{{ micro_video.id }}">{{ micro_video.name }}</option>
-            
-			</select><br>
-			<button onClick="layer_close();" class="btn btn-default radius" type="button"><a href="/product_micro">取消</a></button>
+       <input type="file" id="importFile" />
+       <input type="button" value="上传" onclick="upload()"/>
+      
+     <script>
+     function upload() {
+       var filename = document.getElementById("importFile").value;
+       // 这时的filename不是 importFile 框中的值
+       alert(filename);
+     }
+     </script>
 
-			
-		
-
-		
-		<div id="upload"></div>
-		
+        <div id="upload"></div>
 
         <div id="result"></div>
 
@@ -46,9 +46,10 @@
 		showUploadedSize:true,
         removeTimeout:9999999,
         method: 'post',
-		uploader:'/upload_micro/{{ micro_video.id }}',
+		uploader:'/upload',
 		onUploadStart:function(file){
             console.log(file.name+'开始上传');
+            
             //$("#upload").Huploadify("settings","formData",{'name':'someValue'});
             var goods = $('#goods').val();
             var order = $('#order').val();
@@ -61,6 +62,7 @@
 		onUploadComplete:function(file){
 			console.log(file.name+'上传完成');
             filename = file.name;
+            alert(filename)
             $("#result").html("<img src='http://q2cbcbetl.bkt.clouddn.com/"+file.name+"' />")
 		},
 		onCancel:function(file){
