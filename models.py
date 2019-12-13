@@ -32,7 +32,7 @@ class AdminUser(Base,IdBase):
 
 
 #旗下栏目表
-class Columngroup():
+class Columngroup(Base,IdBase):
     __tablename__ = "columngroup"
     name = Column(String(60))
     account = Column(String(60))  #账号
