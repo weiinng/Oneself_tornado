@@ -47,15 +47,12 @@ videoUrl = "https://video.pearvideo.com/mp4/adshort/20191212/cont-1631908-146896
 
 
 
-<<<<<<< HEAD
 #长代码连接 https://blog.csdn.net/longjuanfengzc/article/details/103006691
 # from moviepy.editor import VideoFileClip
 # 
 # clip = VideoFileClip("https://video.pearvideo.com/mp4/adshort/20191209/cont-1630783-14678805_adpkg-ad_hd.mp4")
 # print(clip.duration)
-=======
 
->>>>>>> 2223f3ff0d8a8564ca87c250367a656e8919e18c
 
 
 # https://blog.csdn.net/y472360651/article/details/79272927
