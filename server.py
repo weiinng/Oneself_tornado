@@ -10,7 +10,7 @@ from application import Application
 if __name__ == "__main__":
     print('启动...')
     app = Application()
-    httpServer = tornado.httpserver.HTTPServer(app)
+    httpServer = tornado.httpserver.HTTPServer(app,max_buffer_size=504857600)
     # httpServer.listen(8888)
     #绑定端口
     httpServer.bind(config.options['port'])

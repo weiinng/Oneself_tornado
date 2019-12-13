@@ -955,18 +955,18 @@ class Upload_video(BaseHandler):
 
         for meta in file_metas:
             filename = meta['filename']
-            file_path = os.path.join(upload_path, filename)
-
+            file_path = os.path.join(upload_path,filename)
+            print(file_path)
             with open(file_path, 'wb') as up:
                 up.write(meta['body'])
-                
-                qiniu_upload(filename, file_path)
-                g_img = Movie(movie_name= filename,micro_video_id=goods)
-                sess.add(g_img)
-                sess.commit()
-                print(g_img)
+            qiniu_upload(filename,file_path)
+            print(filename)
+            g_img = Movie(movie_name=filename,micro_video_id=goods)
+            sess.add(g_img)
+            sess.commit()
+            print(g_img)
 
-                self.redirect('/product_micro')
+            self.redirect('/product_micro')
 
 
 

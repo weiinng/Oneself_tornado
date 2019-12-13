@@ -249,3 +249,12 @@ from models import *
 #         # 创建路径
 #         os.makedirs(file_dir)
 #     return absolute_file_path
+
+
+# import os
+# print(os.path.abspath('/static/imgs/123321.png')) #获取当前目录文件下的工作目录路径
+# print(os.path.abspath("."))
+# print(os.getcwd())  #获取当前工作目录路径
+# print (os.path.abspath('.')) #获取当前工作目录路径
+# print (os.path.abspath('..')) #获取当前工作的父目录 ！注意是父目录路径
+# print (os.path.abspath(os.curdir)) #获取当前工作目录路径

@@ -9,6 +9,7 @@ class Application(tornado.web.Application):
         handlers = [
 
             (r"/ceshi", AppPort.Ceshi),
+            (r"/QiniuUpToken", AppPort.QiniuUpToken),
 
             #主页面操作
             (r"/index", Index.IndexHandler),
