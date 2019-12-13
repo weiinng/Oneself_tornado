@@ -31,6 +31,18 @@ class AdminUser(Base,IdBase):
     is_super = Column(Integer,default=0)         #是否是超级管理员 0位否1为是
 
 
+#旗下栏目表
+class Columngroup():
+    __tablename__ = "columngroup"
+    name = Column(String(60))
+    account = Column(String(60))  #账号
+    password = Column(String(255))  #密码
+    is_activate = Column(Integer,default=0)
+    img = Column(String(255))
+    info = Column(String(255))
+    bg_img = Column(String(255))
+
+
 
 #用户表
 class User(Base,IdBase):
@@ -88,16 +100,8 @@ class Classify(Base,IdBase):
     __tablename__ = "classify"
     name = Column(String(60))               # 分类名
     video_id = Column(Integer)              # 视频id
-    # micro_video_id = Column(Integer)        # 微视频id
 
 
-
-
-# #分类and视频
-# class ClassAndvideo(Base,IdBase):
-#     __tablename__ = "classandvideo"
-#     class_id = Column(Integer)
-#     video_id = Column(Integer,nullable=False)
 
 
 
@@ -125,7 +129,7 @@ class Micro_video(Base,IdBase):
     amount = Column(Integer,default=0)                       #播放次数
     is_show = Column(Integer,default=0)                      #发布状态
     creation_id = Column(Integer)                            #栏目id
-    user_id = Column(Integer)                                #管理员id
+    Column_id = Column(Integer)                              #管理员id
 
 
 
@@ -149,7 +153,6 @@ class Big_V(Base,IdBase):
     constellation = Column(String(255))         #星座
     main_achievements = Column(String(255))     #主要成就
     in_work = Column(String(500))               #代表作品
-    # img = Column(String(500))                   #照片
 
 
 
