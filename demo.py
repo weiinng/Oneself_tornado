@@ -233,6 +233,7 @@ from models import *
 #     return save_upload_file(block_file_path, block_file, name)
 
 
+
 # def get_absolute_file_path(file_name):
 #     """
 #     功能说明：返回绝对路径字符串
@@ -258,3 +259,25 @@ from models import *
 # print (os.path.abspath('.')) #获取当前工作目录路径
 # print (os.path.abspath('..')) #获取当前工作的父目录 ！注意是父目录路径
 # print (os.path.abspath(os.curdir)) #获取当前工作目录路径
+
+
+#展示推荐视频并获取到对应的发布者名称
+
+
+# microall = sess.query(Micro_video).all()
+# video_list = []
+# for micro in microall:
+#     item = {}
+#     item["id"] = micro.id
+#     item["title"] = micro.name
+#     item["length"] = micro.length
+#     item["playnum"] = micro.amount
+#     item["video_url"] = sess.query(Movie.movie_name).filter(Movie.micro_video_id==micro.id)[0][0]
+#     video_column = sess.query(Columngroup.id,Columngroup.name,Columngroup.img).filter(Columngroup.id==micro.column_id)
+#     item["column_id"] = video_column[0][0]
+#     item["column_name"] = video_column[0][1]
+#     item["column_img"] = video_column[0][2]
+#     video_list.append(item)
+# print(video_list)
+
+

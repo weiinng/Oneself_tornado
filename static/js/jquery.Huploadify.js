@@ -14,7 +14,11 @@ var uploadify_option;
 			showUploadedPercent:true,//是否实时显示上传的百分比，如20%
 			showUploadedSize:false,//是否实时显示已上传的文件大小，如1M/2M
 			buttonText:'选择文件',//上传按钮上的文字
+<<<<<<< HEAD
 			removeTimeout: 100000,//上传完成后进度条的消失时间，单位毫秒
+=======
+			removeTimeout: 1000000,//上传完成后进度条的消失时间，单位毫秒
+>>>>>>> 2223f3ff0d8a8564ca87c250367a656e8919e18c
 			itemTemplate:itemTemp,//上传队列显示的模板
 			onUploadStart:null,//上传开始时的动作
 			onUploadSuccess:null,//上传成功的动作

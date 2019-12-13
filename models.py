@@ -31,6 +31,18 @@ class AdminUser(Base,IdBase):
     is_super = Column(Integer,default=0)         #是否是超级管理员 0位否1为是
 
 
+#旗下栏目表
+class Columngroup(Base,IdBase):
+    __tablename__ = "columngroup"
+    name = Column(String(60))
+    account = Column(String(60))  #账号
+    password = Column(String(255))  #密码
+    is_activate = Column(Integer,default=0)
+    img = Column(String(255))
+    info = Column(String(255))
+    bg_img = Column(String(255))
+
+
 
 
 #旗下栏目表
@@ -101,6 +113,11 @@ class Classify(Base,IdBase):
     name = Column(String(60))               # 分类名
     video_id = Column(Integer)              # 视频id
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 2223f3ff0d8a8564ca87c250367a656e8919e18c
 
 
 # 栏目表
@@ -127,8 +144,22 @@ class Micro_video(Base,IdBase):
     amount = Column(Integer,default=0)                       #播放次数
     is_show = Column(Integer,default=0)                      #发布状态
     creation_id = Column(Integer)                            #栏目id
+<<<<<<< HEAD
     Column_id = Column(Integer)                                #管理员id
+=======
+    column_id = Column(Integer)                              #管理员id
 
+>>>>>>> 2223f3ff0d8a8564ca87c250367a656e8919e18c
+
+# 存放视频表
+class Movie(Base):
+    __tablename__ = 'movie'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    movie_name = Column(String(500))        #视频名称
+    big_v_id = Column(Integer)              #明星id
+    video_id = Column(Integer)              #视频id
+    user_id = Column(Integer)               #用户id
+    micro_video_id = Column(Integer)        #微视频id
 
 
 
@@ -244,15 +275,7 @@ class Picture(Base):
     micro_video_id = Column(Integer)        #微视频id
 
 
-# 存放视频表
-class Movie(Base):
-    __tablename__ = 'movie'
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    movie_name = Column(String(500))        #视频名称
-    big_v_id = Column(Integer)              #明星id
-    video_id = Column(Integer)              #视频id
-    user_id = Column(Integer)               #用户id
-    micro_video_id = Column(Integer)        #微视频id
+
 
 
 #系统表
