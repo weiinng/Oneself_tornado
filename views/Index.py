@@ -514,7 +514,6 @@ class Product_micro(BaseHandler):
             m_dict = {}
             m_dict['id'] = i.id
             m_dict['name'] = i.name
-            m_dict['length'] = i.length
             m_dict['is_show'] = i.is_show
             m_list.append(m_dict)
         self.render('../templates/product_micro.html', micro_video=m_list, lens=lens)
@@ -527,7 +526,6 @@ class Product_micro(BaseHandler):
             m_dict = {}
             m_dict['id'] = i.id
             m_dict['name'] = i.name
-            m_dict['length'] = i.length
             m_dict['is_show'] = i.is_show
             m_list.append(m_dict)
         self.render('../templates/product_micro.html', micro_video=m_list, lens=lens)
@@ -544,9 +542,8 @@ class Product_video_add(BaseHandler):
     def post(self, *args, **kwargs):
         mes = {}
         mes['data'] = ''
-        length = self.get_argument('length', '')
         name = self.get_argument('name', '')
-        if not all([name,length]):
+        if not all([name]):
             mes['data'] = "参数不能为空,请重新输入"
             self.render('../templates/product_video_add.html',**mes)
         else:
@@ -554,7 +551,7 @@ class Product_video_add(BaseHandler):
                 sess.query(Micro_video).filter(Micro_video.name==name).one()
             except:
                 micro_video = Micro_video(
-                    name=name,length=length)
+                    name=name)
                 sess.add(micro_video)
                 sess.commit()
                 self.redirect('/product_micro')
@@ -865,9 +862,7 @@ class Product_micro_edit(BaseHandler):
     def post(self, id):
         p = sess.query(Micro_video).filter_by(id=id).first()
         name = self.get_argument('name', '')
-        length = self.get_argument('length', '')
         p.name = name
-        p.length = length
         sess.commit()
         self.redirect('/product_micro')
 
@@ -958,6 +953,7 @@ class Upload_video(BaseHandler):
             with open(file_path, 'wb') as up:
                 up.write(meta['body'])
             qiniu_upload(filename,file_path)
+            
             print(filename)
             g_img = Movie(movie_name="http://q2cbcbetl.bkt.clouddn.com/"+filename,
             micro_video_id=goods)

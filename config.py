@@ -25,7 +25,7 @@ setting = {
 #mysql配置
 HOSTNAME = '106.13.67.197'   #ip地址
 PORT = '3306'                #端口
-DATABASE = 'red_db'          #数据库名
+DATABASE = 'zzzzz'          #数据库名
 USERNAME = 'root'            #账号
 PASSWORD = '123456'          #密码
 

@@ -84,7 +84,6 @@ class Video(Base,IdBase):
     path = Column(String(100))                   #播放路径  （必填）
     amount = Column(Integer,default=0)           #播放次数
     hot = Column(Integer)                        #热度值
-    img2 = Column(String(255))                   #视频的轮播图 可以没有
     thiscat_id = Column(Integer)                 #视频所属的栏目   （必填）
     video_weight = Column(Integer,default=40)    #视频权重（0~99）越小越靠前默认为40
     video_source = Column(Integer)               #这个会获取到管理员的id，超级管理员可以直接指定
@@ -122,12 +121,12 @@ class Label(Base,IdBase):
 class Micro_video(Base,IdBase):
     __tablename__ = "micro_video"
     name = Column(String(100))                               #微视频内容标题(必填)
-    length = Column(String(100))                             #片长
     issue_time = Column(DateTime(),default=datetime.now)     #发布时间（精确到秒）
     amount = Column(Integer,default=0)                       #播放次数
     is_show = Column(Integer,default=0)                      #发布状态
     creation_id = Column(Integer)                            #栏目id
     column_id = Column(Integer)                              #管理员id
+
 
 
 # 存放视频表
@@ -139,6 +138,8 @@ class Movie(Base):
     video_id = Column(Integer)              #视频id
     user_id = Column(Integer)               #用户id
     micro_video_id = Column(Integer)        #微视频id
+    length = Column(String(100))            #片长
+
 
 
 
