@@ -40,12 +40,7 @@ def setUrlUp(imgName,imgPage):
         return 404
 
 
-print(setUrlUp("消防员跳蒙古舞走红,网友:求当女婿","https://video.pearvideo.com/mp4/adshort/20191212/cont-1631908-14689699_adpkg-ad_hd.mp4"))
-
-
-
-
-
+# print(setUrlUp("消防员跳蒙古舞走红,网友:求当女婿","https://video.pearvideo.com/mp4/adshort/20191212/cont-1631908-14689699_adpkg-ad_hd.mp4"))
 
 
 videoUrl = "https://video.pearvideo.com/mp4/adshort/20191212/cont-1631908-14689699_adpkg-ad_hd.mp4"

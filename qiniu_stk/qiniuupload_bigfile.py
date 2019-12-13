@@ -41,7 +41,7 @@ def uploadBigVideo(keyNmae,localfile):
     # except:
     #     return 404
 
-print(uploadBigVideo("movie1.mp4","movie1.mp4"))
+# print(uploadBigVideo("movie1.mp4","movie1.mp4"))
 
 
 
