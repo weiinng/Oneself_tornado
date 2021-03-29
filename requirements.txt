@@ -123,7 +123,7 @@ pycket==0.3.0
 pycparser==2.19
 pycryptodome==3.8.2
 PyDispatcher==2.0.5
-Pygments==2.4.1
+Pygments==2.7.4
 PyHamcrest==1.9.0
 PyJWT==1.7.1
 pylint==2.3.1
