@@ -108,7 +108,7 @@ parsel==1.5.1
 parso==0.4.0
 pelican==4.1.0
 pickleshare==0.7.5
-Pillow==5.4.1
+Pillow==9.0.1
 Pint==0.9
 plotly==3.10.0
 pluggy==0.12.0
