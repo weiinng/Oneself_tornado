@@ -95,7 +95,7 @@ mysqlclient==1.4.2.post1
 Naked==0.1.31
 nbconvert==5.5.0
 nbformat==4.4.0
-notebook==5.7.8
+notebook==6.4.10
 numba==0.44.1
 numexpr==2.6.9
 numpy==1.16.3
