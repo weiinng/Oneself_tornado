@@ -68,7 +68,7 @@ itsdangerous==1.1.0
 jedi==0.13.3
 jieba==0.39
 Jinja2==2.10
-joblib==0.13.2
+joblib==1.2.0
 json-tricks==3.13.1
 jsonpath==0.80
 jsonschema==3.0.1
